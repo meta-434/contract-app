@@ -2,14 +2,13 @@ import React from 'react';
 import logo from './logo.svg';
 import './App.css';
 import CompanyProfile from './CompanyProfile.js';
-import MyButton from './MyButton.js';
-function App() {
+
+function Test() {
   return (
     <div>
-      <MyButton/>
-      <CompanyProfile/>
+      Test
     </div>
   );
 }
 
-export default App;
+export default Test;
