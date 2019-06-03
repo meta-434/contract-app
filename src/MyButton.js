@@ -29,7 +29,7 @@ export default function MyButton() {
         <div>
             <Button variant="contained" color="primary" className={classes.button}>
                 <Icon className={classes.myIcon}>add</Icon>
-                    Add New Contract
+                {this.props.buttonText}
             </Button>
         </div>
     );
