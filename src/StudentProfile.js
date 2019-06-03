@@ -53,12 +53,11 @@ function StudentProfile(props) {
                     </ListItem>
                     </List>
 
-
                 {/* Contracts list only Available if user is logged in */}
+                {/* Ideally this will be material-UI talbe */}
                 <h1>Current Contracts</h1>
             </div>
         )     
-    
 }
 
 export default StudentProfile
