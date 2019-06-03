@@ -3,7 +3,7 @@ import { makeStyles } from "@material-ui/core/styles";
 import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
 import Typography from "@material-ui/core/Typography";
-import IconButton from "@material-ui/core/IconButton";
+import Button from "@material-ui/core/Button";
 import MenuIcon from "@material-ui/icons/Menu";
 import Chip from "@material-ui/core/Chip";
 import Avatar from "@material-ui/core/Avatar";
@@ -24,23 +24,23 @@ const useStyles = makeStyles(theme => ({
 }));
 
 function DenseAppBar() {
+  //should be used for chip only
   function handleDelete() {
     console.log("This will log you out.");
   }
-
- function handleMenuChoice(e) {
-    console.log(e.target.id)
-    console.log("This will eventually redirect to unique pages.");
+  //should be used to visit your profile (only from chip)
+  function handleClick(e) {
+    console.log("this will take you to your profile");
   }
-
   const [anchorEl, setAnchorEl] = React.useState(null);
 
-  function handleClick (e) {
-    console.log("the menu has been pressed");
-    setAnchorEl(e.currentTarget);
+  function handleClick(event) {
+    console.log("click triggered")
+    setAnchorEl(event.currentTarget);
   }
 
   function handleClose() {
+    console.log("close triggered")
     setAnchorEl(null);
   }
 
@@ -49,15 +49,14 @@ function DenseAppBar() {
     <div className={classes.root}>
       <AppBar position="static">
         <Toolbar variant="dense">
-          <IconButton
-            aria-haspopup="true"
-            edge="start"
-            className={classes.menuButton}
-            color="inherit"
-            aria-label="Menu"
-            onClick={handleClick}
-          >
-            <MenuIcon />
+          <div>
+            <Button
+              aria-controls="simple-menu"
+              aria-haspopup="true"
+              onClick={handleClick}
+            >
+              <MenuIcon />
+            </Button>
             <Menu
               id="simple-menu"
               anchorEl={anchorEl}
@@ -65,11 +64,12 @@ function DenseAppBar() {
               open={Boolean(anchorEl)}
               onClose={handleClose}
             >
-              <MenuItem onClick={handleMenuChoice}>Profile</MenuItem>
-              <MenuItem onClick={handleMenuChoice}>Marketplace</MenuItem>
-              <MenuItem onClick={handleMenuChoice}>Contracts</MenuItem>
+              <MenuItem onClick={handleClose}>Profile</MenuItem>
+              <MenuItem onClick={handleClose}>My account</MenuItem>
+              <MenuItem onClick={handleClose}>Logout</MenuItem>
             </Menu>
-          </IconButton>
+          </div>
+
           <Typography variant="h6" color="inherit" className={classes.title}>
             RevTek Internships
           </Typography>
