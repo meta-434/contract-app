@@ -102,17 +102,7 @@ function StudentBid(props) {
                         shrink: true,
                         }}
                     />
-                    <TextField
-                        id="outlined-multiline-flexible"
-                        label="Price"
-                        value={values.multiline}
-                        onChange={handleChange('multiline')}
-                        className={classes.textField}
-                        margin="normal"
-                        helperText="USD"
-                        variant="outlined"
-                    /> 
-                    <TextField
+                    {/* <TextField
                         id="outlined-multiline-flexible"
                         label="Description"
                         multiline
@@ -122,7 +112,7 @@ function StudentBid(props) {
                         className={classes.textField}
                         margin="normal"
                         variant="outlined"
-                    />
+                    /> */}
                     <FormControl fullWidth className={classes.margin}>
                         <InputLabel htmlFor="adornment-amount">Amount</InputLabel>
                         <Input
@@ -132,7 +122,6 @@ function StudentBid(props) {
                             startAdornment={<InputAdornment position="start">$</InputAdornment>}
                         />
                     </FormControl>
-
                 </form>
 
                 <Button variant="contained" className={classes.button}>
