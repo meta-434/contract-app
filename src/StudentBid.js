@@ -2,6 +2,14 @@ import React, { Component } from 'react'
 import { makeStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
+import Paper from '@material-ui/core/Paper';
+import Typography from '@material-ui/core/Typography';
+
+import Input from '@material-ui/core/Input';
+import InputLabel from '@material-ui/core/InputLabel';
+import InputAdornment from '@material-ui/core/InputAdornment';
+import FormControl from '@material-ui/core/FormControl';
+
 
 // material UI setup & text field setup
 const useStyles = makeStyles(theme => ({
@@ -24,12 +32,19 @@ const useStyles = makeStyles(theme => ({
         marginLeft: theme.spacing(1),
         marginRight: theme.spacing(1),
         width: 200,
+        flexBasis: 200,
     },
     dense: {
         marginTop: theme.spacing(2),
     },
     menu: {
         width: 200,
+    },
+    root: {
+        padding: theme.spacing(3, 2),
+    },
+    withoutLabel: {
+        marginTop: theme.spacing(3),
     },
 }));
 
@@ -40,6 +55,11 @@ function StudentBid(props) {
         // age: '',
         // multiline: 'Controlled',
         // currency: 'EUR',
+        amount: '',
+        password: '',
+        weight: '',
+        weightRange: '',
+        showPassword: false,
       });
     const handleChange = name => event => {
         setValues({ ...values, [name]: event.target.value });
@@ -48,10 +68,21 @@ function StudentBid(props) {
         return (
             <div>
                 {/* Somehow render details of contract selected from StudentContracts.js */}
-                <h1>Contract Details</h1>
+                <Paper className={classes.root}>
+                    <Typography variant="h3" component="h3">
+                        Contract Details
+                    </Typography>
+                </Paper>
+               
+                <p>query contract details from selected contract here</p>
+
+                <Paper className={classes.root}>
+                    <Typography variant="h3" component="h3">
+                        Submit Your Bid
+                    </Typography>
+                </Paper>
 
                 {/* Submit a bid for that contract to the company (once approved?) */}
-                <h1>Submit Your Bid</h1>
                 <form className={classes.container} noValidate autoComplete="off">
                 <TextField
                         id="date"
@@ -92,6 +123,15 @@ function StudentBid(props) {
                         margin="normal"
                         variant="outlined"
                     />
+                    <FormControl fullWidth className={classes.margin}>
+                        <InputLabel htmlFor="adornment-amount">Amount</InputLabel>
+                        <Input
+                            id="adornment-amount"
+                            value={values.amount}
+                            onChange={handleChange('amount')}
+                            startAdornment={<InputAdornment position="start">$</InputAdornment>}
+                        />
+                    </FormControl>
 
                 </form>
 
