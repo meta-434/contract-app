@@ -1,8 +1,6 @@
 import React, { Component } from 'react'
-
 import { makeStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
-
 import TextField from '@material-ui/core/TextField';
 
 // material UI setup & text field setup
@@ -25,6 +23,7 @@ const useStyles = makeStyles(theme => ({
     textField: {
         marginLeft: theme.spacing(1),
         marginRight: theme.spacing(1),
+        width: 200,
     },
     dense: {
         marginTop: theme.spacing(2),
@@ -37,14 +36,14 @@ const useStyles = makeStyles(theme => ({
 function StudentBid(props) {
     const classes = useStyles();
     const [values, setValues] = React.useState({
-        name: 'Cat in the Hat',
-        age: '',
-        multiline: 'Controlled',
-        currency: 'EUR',
+        // name: 'Cat in the Hat',
+        // age: '',
+        // multiline: 'Controlled',
+        // currency: 'EUR',
       });
-      const handleChange = name => event => {
+    const handleChange = name => event => {
         setValues({ ...values, [name]: event.target.value });
-      };
+    };
    
         return (
             <div>
@@ -54,18 +53,46 @@ function StudentBid(props) {
                 {/* Submit a bid for that contract to the company (once approved?) */}
                 <h1>Submit Your Bid</h1>
                 <form className={classes.container} noValidate autoComplete="off">
+                <TextField
+                        id="date"
+                        label="Start Date"
+                        type="date"
+                        className={classes.textField}
+                        InputLabelProps={{
+                        shrink: true,
+                        }}
+                    />
+                    <TextField
+                        id="date"
+                        label="End Date"
+                        type="date"
+                        className={classes.textField}
+                        InputLabelProps={{
+                        shrink: true,
+                        }}
+                    />
                     <TextField
                         id="outlined-multiline-flexible"
-                        label="Multiline"
+                        label="Price"
+                        value={values.multiline}
+                        onChange={handleChange('multiline')}
+                        className={classes.textField}
+                        margin="normal"
+                        helperText="USD"
+                        variant="outlined"
+                    /> 
+                    <TextField
+                        id="outlined-multiline-flexible"
+                        label="Description"
                         multiline
                         rowsMax="4"
                         value={values.multiline}
                         onChange={handleChange('multiline')}
                         className={classes.textField}
                         margin="normal"
-                        helperText="hello"
                         variant="outlined"
                     />
+
                 </form>
 
                 <Button variant="contained" className={classes.button}>
