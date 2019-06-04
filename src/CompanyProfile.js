@@ -9,7 +9,7 @@ import Typography from '@material-ui/core/Typography';
 import List from '@material-ui/core/List';
 import IconButton from '@material-ui/core/IconButton';
 import Icon from '@material-ui/core/Icon';
-
+import firebase from './firebase.js';
 
 const useStyles = makeStyles(theme => ({
 	button: {
@@ -20,6 +20,18 @@ const useStyles = makeStyles(theme => ({
 		marginRight: 5,
 	}
 }));
+
+const getData = () => {
+	var uid = "Cm8Bc5MCK0Z1DITfDiHcbQU4wIk1" //firebase.auth().currentUser.uid;
+	var info = [];
+	firebase.database().ref('/users/company/' + uid).once('value').then( (snapshot) => {
+		snapshot.forEach(child => {
+			info.push(child.val());
+		})
+	});
+	return info;
+}
+
 
 function CompanyProfile() {
 	const classes = useStyles();
@@ -37,9 +49,10 @@ function CompanyProfile() {
 					<Route path="/CreateContract" component={CreateContract}/>
 					<h1>Current Contracts</h1>
             <List alignItems="flex-start">
+								
                 <ListItem>
                   <ListItemText
-                    primary="Contract Title"
+                    primary="Contract Details"
                   />
                 </ListItem>
 								<ListItem>
@@ -47,6 +60,7 @@ function CompanyProfile() {
                     primary="Contract Details"
                   />
                 </ListItem>
+								{console.log(getData())}
             </List>
 				</Router>
         
@@ -55,3 +69,11 @@ function CompanyProfile() {
 }
 
 export default CompanyProfile;
+/*{getData().map(data => {
+									{<ListItem>
+                  <ListItemText
+                    primary={data}
+                  />
+                </ListItem>}
+
+								})}*/
