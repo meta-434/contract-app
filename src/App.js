@@ -1,18 +1,21 @@
-import React from 'react';
-import './App.css';
-import CompanyProfile from './CompanyProfile.js';
+import React from "react";
+import "./App.css";
+import CompanyProfile from "./CompanyProfile.js";
 // import StudentProfile from './StudentProfile';
 // import StudentBid from './StudentBid';
 // import StudentContracts from './StudentContracts';
-import StudentCard from './StudentCard.js'
-import Home from "./Home.js"
+import StudentCard from "./StudentCard.js";
+import Home from "./Home.js";
+import StudentContracts from "./StudentContracts.js";
+import AppHeaderBar from "./AppHeaderBar";
 
 function App() {
   return (
-     
     <div>
-     <Home />
+      <AppHeaderBar />
+      {/* <Home /> */}
       {/*<CompanyProfile/>*/}
+      <StudentContracts />
     </div>
   );
 }
