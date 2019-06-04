@@ -7,6 +7,7 @@ import ExpansionPanelDetails from "@material-ui/core/ExpansionPanelDetails";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 import TextField from "@material-ui/core/TextField";
 import Reply from "@material-ui/icons/Reply";
+import Tooltip from "@material-ui/core/Tooltip";
 
 class Home extends Component {
   constructor(props) {
@@ -34,11 +35,19 @@ class Home extends Component {
         <AppHeaderBar />
 
         <Container maxWidth="md">
-          <div>
-            <h3>Task Board</h3>
+          <div
+            style={{
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
+              height: "10vh",
+              //specify font maybe?
+            }}
+          >
+            <h3>Daily Challenge Feed</h3>
           </div>
           <Card>
-            <ExpansionPanel>
+            <ExpansionPanel xs={12}>
               <ExpansionPanelSummary
                 expandIcon={<ExpandMoreIcon />}
                 aria-controls="panel1a-content"
@@ -55,7 +64,8 @@ class Home extends Component {
                 >
                   <Grid item xs={12}>
                     <Typography>
-                      This would be a sample task that is posted by an instuctor.
+                      This would be a sample task that is posted by an
+                      instuctor.
                     </Typography>
                   </Grid>
                   <Grid item xs={12}>
@@ -63,9 +73,9 @@ class Home extends Component {
                       <TextField
                         required
                         id="outlined-helperText"
-                        label="Completed Submission"
-                        defaultValue="github.com/user/repo..."
-                        helperText="Please submit the link to your completed repository"
+                        label="My Solution"
+                        defaultValue="https://www/github.com/user/repo..."
+                        helperText="Github links only"
                         margin="normal"
                         variant="outlined"
                         fullWidth={true}
@@ -74,6 +84,7 @@ class Home extends Component {
                     </label>
                   </Grid>
                   <Grid item xs={3}>
+                  <Tooltip title="Submit Github Repo">
                     <Button
                       variant="contained"
                       color="default"
@@ -82,12 +93,14 @@ class Home extends Component {
                       Reply
                       <Reply />
                     </Button>
+                    </Tooltip>
                   </Grid>
                 </Grid>
               </ExpansionPanelDetails>
             </ExpansionPanel>
           </Card>
           <p>{"\n"}</p>
+          {/* this is the end of a single task item. copy paste between comments to duplicate*/}
         </Container>
       </div>
     );
