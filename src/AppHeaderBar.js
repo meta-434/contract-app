@@ -4,6 +4,7 @@ import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
 import Typography from "@material-ui/core/Typography";
 import Button from "@material-ui/core/Button";
+import IconButton from '@material-ui/core/IconButton';
 import MenuIcon from "@material-ui/icons/Menu";
 import Chip from "@material-ui/core/Chip";
 import Avatar from "@material-ui/core/Avatar";
@@ -25,22 +26,22 @@ const useStyles = makeStyles(theme => ({
 
 function DenseAppBar() {
   //should be used for chip only
-  function handleDelete() {
+  function handleChipDelete() {
     console.log("This will log you out.");
   }
   //should be used to visit your profile (only from chip)
-  function handleClick(e) {
+  function handleChipClick() {
     console.log("this will take you to your profile");
   }
   const [anchorEl, setAnchorEl] = React.useState(null);
-
+  //not being used
   function handleClick(event) {
-    console.log("click triggered")
+    console.log("click triggered");
     setAnchorEl(event.currentTarget);
   }
 
   function handleClose() {
-    console.log("close triggered")
+    console.log("close triggered");
     setAnchorEl(null);
   }
 
@@ -50,13 +51,13 @@ function DenseAppBar() {
       <AppBar position="static">
         <Toolbar variant="dense">
           <div>
-            <Button
+            <IconButton
               aria-controls="simple-menu"
               aria-haspopup="true"
               onClick={handleClick}
             >
               <MenuIcon />
-            </Button>
+            </IconButton>
             <Menu
               id="simple-menu"
               anchorEl={anchorEl}
@@ -80,9 +81,9 @@ function DenseAppBar() {
               label="Sample Student"
               clickable
               className={classes.chip}
-              onClick={handleClick} // visit my profile
+              onClick={handleChipClick} // visit my profile
               color="primary"
-              onDelete={handleDelete} // sign out
+              onDelete={handleChipDelete} // sign out
             />
           </Tooltip>
         </Toolbar>
