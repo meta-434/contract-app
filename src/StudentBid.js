@@ -27,6 +27,9 @@ const useStyles = makeStyles(theme => ({
     container: {
         display: 'flex',
         flexWrap: 'wrap',
+        paddingTop: 50,
+        paddingBottom: 20,
+        paddingLeft: 20,
       },
     textField: {
         marginLeft: theme.spacing(1),
@@ -51,10 +54,6 @@ const useStyles = makeStyles(theme => ({
 function StudentBid(props) {
     const classes = useStyles();
     const [values, setValues] = React.useState({
-        // name: 'Cat in the Hat',
-        // age: '',
-        // multiline: 'Controlled',
-        // currency: 'EUR',
         amount: '',
         password: '',
         weight: '',
@@ -74,7 +73,7 @@ function StudentBid(props) {
                     </Typography>
                 </Paper>
                
-                <p>query contract details from selected contract here</p>
+                <p style={{paddingLeft:20, paddingBottom:20,}}> ~query contract details from selected contract here~ </p>
 
                 <Paper className={classes.root}>
                     <Typography variant="h3" component="h3">
@@ -84,7 +83,7 @@ function StudentBid(props) {
 
                 {/* Submit a bid for that contract to the company (once approved?) */}
                 <form className={classes.container} noValidate autoComplete="off">
-                <TextField
+                    <TextField
                         id="date"
                         label="Start Date"
                         type="date"
@@ -102,18 +101,7 @@ function StudentBid(props) {
                         shrink: true,
                         }}
                     />
-                    {/* <TextField
-                        id="outlined-multiline-flexible"
-                        label="Description"
-                        multiline
-                        rowsMax="4"
-                        value={values.multiline}
-                        onChange={handleChange('multiline')}
-                        className={classes.textField}
-                        margin="normal"
-                        variant="outlined"
-                    /> */}
-                    <FormControl fullWidth className={classes.margin}>
+                    <FormControl className={classes.margin}>
                         <InputLabel htmlFor="adornment-amount">Amount</InputLabel>
                         <Input
                             id="adornment-amount"
@@ -122,11 +110,13 @@ function StudentBid(props) {
                             startAdornment={<InputAdornment position="start">$</InputAdornment>}
                         />
                     </FormControl>
+                    <Button variant="contained" className={classes.button}>
+                        Submit
+                    </Button>
                 </form>
 
-                <Button variant="contained" className={classes.button}>
-                    Submit
-                </Button>
+
+
             </div>
         )
     
