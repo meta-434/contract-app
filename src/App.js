@@ -7,9 +7,9 @@ import StudentContracts from './StudentContracts';
 function App() {
   return (
     <div>
-      {/* <StudentProfile /> */}
+      <StudentProfile />
       {/* <StudentContracts />  */}
-      <StudentBid />
+      {/* <StudentBid /> */}
     </div>
   );
 }
