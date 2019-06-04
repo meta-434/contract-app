@@ -4,10 +4,12 @@ import './App.css';
 // import StudentBid from './StudentBid';
 // import StudentContracts from './StudentContracts';
 import StudentCard from './StudentCard.js'
+import Home from "./Home.js"
 
 function App() {
   return (
     <div>
+     <Home />
     </div>
   );
 }
