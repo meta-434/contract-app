@@ -5,14 +5,28 @@ import ExpansionPanel from "@material-ui/core/ExpansionPanel";
 import ExpansionPanelSummary from "@material-ui/core/ExpansionPanelSummary";
 import ExpansionPanelDetails from "@material-ui/core/ExpansionPanelDetails";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
-import CloudUploadIcon from "@material-ui/icons/CloudUpload";
+import TextField from "@material-ui/core/TextField";
+import Reply from "@material-ui/icons/Reply";
 
 class Home extends Component {
   constructor(props) {
     super(props);
 
-    this.state = {};
+    this.state = {
+      input: null,
+      submission: null
+    };
   }
+
+  // send to DB
+  handleSubmissionClick = () => {
+    console.log("submission is: ", this.state.input);
+  };
+
+  handleSubmissionInput = event => {
+    console.log(event.target.value);
+    this.setState({ input: event.target.value });
+  };
 
   render() {
     return (
@@ -33,126 +47,47 @@ class Home extends Component {
                 <Typography>Sample Task 1</Typography>
               </ExpansionPanelSummary>
               <ExpansionPanelDetails>
-                <Typography>The task description can be short, or-</Typography>
-              </ExpansionPanelDetails>
-            </ExpansionPanel>
-          </Card>
-          <p>{"\n"}</p>
-          <Card>
-            <ExpansionPanel>
-              <ExpansionPanelSummary
-                expandIcon={<ExpandMoreIcon />}
-                aria-controls="panel1a-content"
-                id="panel1a-header"
-              >
-                <Typography>Sample Task 2</Typography>
-              </ExpansionPanelSummary>
-              <ExpansionPanelDetails>
-                <Grid container spacing={3}>
+                <Grid
+                  container
+                  spacing={1.5}
+                  justify="flex-end"
+                  alignItems="flex-end"
+                >
                   <Grid item xs={12}>
                     <Typography>
-                      It can be very long. Lorem ipsum dolor sit amet,
-                      consectetur adipiscing elit. Suspendisse malesuada lacus
-                      ex, sit amet blandit leo lobortis eget. Lorem ipsum dolor
-                      sit amet, consectetur adipiscing elit. Suspendisse
-                      malesuada lacus ex, sit amet blandit leo lobortis eget.
-                      Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                      Suspendisse malesuada lacus ex, sit amet blandit leo
-                      lobortis eget. Lorem ipsum dolor sit amet, consectetur
-                      adipiscing elit. Suspendisse malesuada lacus ex, sit amet
-                      blandit leo lobortis eget. Lorem ipsum dolor sit amet,
-                      consectetur adipiscing elit. Suspendisse malesuada lacus
-                      ex, sit amet blandit leo lobortis eget. Lorem ipsum dolor
-                      sit amet, consectetur adipiscing elit. Suspendisse
-                      malesuada lacus ex, sit amet blandit leo lobortis eget.
-                      Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                      Suspendisse malesuada lacus ex, sit amet blandit leo
-                      lobortis eget.
+                      This would be a sample task that is posted by an instuctor.
                     </Typography>
                   </Grid>
+                  <Grid item xs={12}>
+                    <label htmlFor="outlined-button-file">
+                      <TextField
+                        required
+                        id="outlined-helperText"
+                        label="Completed Submission"
+                        defaultValue="github.com/user/repo..."
+                        helperText="Please submit the link to your completed repository"
+                        margin="normal"
+                        variant="outlined"
+                        fullWidth={true}
+                        onChange={this.handleSubmissionInput}
+                      />
+                    </label>
+                  </Grid>
                   <Grid item xs={3}>
-                    <label htmlFor="outlined-button-file">
-                      <Button
-                        variant="contained"
-                        color="default"
-                      >
-                        Reply
-                        <CloudUploadIcon />
-                      </Button>
-                    </label>
-
-                    <label htmlFor="outlined-button-file">
-                      <Button
-                        variant="contained"
-                        color="default"
-                      >
-                        Upload
-                        <CloudUploadIcon />
-                      </Button>
-                    </label>
+                    <Button
+                      variant="contained"
+                      color="default"
+                      onClick={this.handleSubmissionClick}
+                    >
+                      Reply
+                      <Reply />
+                    </Button>
                   </Grid>
                 </Grid>
               </ExpansionPanelDetails>
             </ExpansionPanel>
           </Card>
           <p>{"\n"}</p>
-          <Card>
-            <ExpansionPanel>
-              <ExpansionPanelSummary
-                expandIcon={<ExpandMoreIcon />}
-                aria-controls="panel1a-content"
-                id="panel1a-header"
-              >
-                <Typography>Sample Task 3</Typography>
-              </ExpansionPanelSummary>
-              <ExpansionPanelDetails>
-                <Grid container spacing={3}>
-                  <Grid item xs={12}>
-                    <Typography>
-                      It can be very long. Lorem ipsum dolor sit amet,
-                      consectetur adipiscing elit. Suspendisse malesuada lacus
-                      ex, sit amet blandit leo lobortis eget. Lorem ipsum dolor
-                      sit amet, consectetur adipiscing elit. Suspendisse
-                      malesuada lacus ex, sit amet blandit leo lobortis eget.
-                      Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                      Suspendisse malesuada lacus ex, sit amet blandit leo
-                      lobortis eget. Lorem ipsum dolor sit amet, consectetur
-                      adipiscing elit. Suspendisse malesuada lacus ex, sit amet
-                      blandit leo lobortis eget. Lorem ipsum dolor sit amet,
-                      consectetur adipiscing elit. Suspendisse malesuada lacus
-                      ex, sit amet blandit leo lobortis eget. Lorem ipsum dolor
-                      sit amet, consectetur adipiscing elit. Suspendisse
-                      malesuada lacus ex, sit amet blandit leo lobortis eget.
-                      Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                      Suspendisse malesuada lacus ex, sit amet blandit leo
-                      lobortis eget.
-                    </Typography>
-                  </Grid>
-                  <Grid item xs={3}>
-                    <label htmlFor="outlined-button-file">
-                      <Button
-                        variant="contained"
-                        color="default"
-                      >
-                        Reply
-                        <CloudUploadIcon />
-                      </Button>
-                    </label>
-                    
-                    <label htmlFor="outlined-button-file">
-                      <Button
-                        variant="contained"
-                        color="default"
-                      >
-                        Upload
-                        <CloudUploadIcon />
-                      </Button>
-                    </label>
-                  </Grid>
-                </Grid>
-              </ExpansionPanelDetails>
-            </ExpansionPanel>
-          </Card>
         </Container>
       </div>
     );
