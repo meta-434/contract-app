@@ -2,23 +2,50 @@
 import React from 'react';
 import 'antd/dist/antd.css';
 import './login.css';
-import { Form, Icon, Input, Button, Alert, message } from 'antd';
+import Textfield from '@material-ui/core/TextField';
+import Button from '@material-ui/core/Button';
+import {CloseIcon} from '@material-ui/icons/Close';
+//import { Form, Icon, Input, Button, Alert, message } from 'antd';
+import {Alert} from 'antd';
 import NewUser from "./NewUser.js";
+import Grid from '@material-ui/core/Grid';
+import { makeStyles } from '@material-ui/core/styles';
+import Container from '@material-ui/core/Container';
 //import Profile from './Profile.js';
 import firebase from "./firebase.js";
 import { BrowserRouter as Router, Route, Link, Redirect } from 'react-router-dom'
 
-
+const classes = makeStyles(theme => ({
+    '@global': {
+      body: {
+        backgroundColor: theme.palette.common.white,
+      },
+    },
+    paper: {
+      marginTop: theme.spacing(8),
+      display: 'flex',
+      flexDirection: 'column',
+      alignItems: 'center',
+    },
+    avatar: {
+      margin: theme.spacing(1),
+      backgroundColor: theme.palette.secondary.main,
+    },
+    form: {
+      width: '100%', // Fix IE 11 issue.
+      marginTop: theme.spacing(1),
+    },
+    submit: {
+      margin: theme.spacing(3, 0, 2),
+    },
+  }));
+  
 const setErrorMessage = (error) => {
     return (
         error
     )
 }
 
-const info = () => {
-    message.info('This is a normal message');
-    
-};
 class LogIn extends React.Component{
 
     state = {
@@ -109,34 +136,38 @@ class LogIn extends React.Component{
     render(){
         return(
             <div className="login">
-                <h1>RevTech App</h1>
-                <Form  className="login-form">
+                <h4>RevTech</h4>
+                <h3>Welcome Back</h3>
+                <div>Sign in to stay updated on new oppurtunities</div>
+                <div  className="login-form">
                         {this.state.loginError ? <Alert message="Invalid username or password, try again" type="error" /> : <div></div>}
-                        <Input
-                            prefix={<Icon type="user" style={{ color: 'rgba(0,0,0,.25)' }} />}
-                            placeholder="Username"
+                        <Textfield
+                            variant="outlined" margin="normal" required fullWidth 
+                            id="email" label="Username(email)" 
                             onChange={(e)=>this.changeUsername(e.target.value)}
                         />
 
-                        <Input
-                            prefix={<Icon type="lock" style={{ color: 'rgba(0,0,0,.25)' }} />}
-                            type="password"
-                            placeholder="Password"
+                        <Textfield
+                            variant="outlined" margin="normal" required fullWidth type="password"
+                            id="password" label="Password" 
                             onChange={(e)=>this.changePassword(e.target.value)}
                         />
 
-                        <Button type="primary" onClick={this.handleLogIn} className="login-form-button">
+                        <Button type="submit" fullWidth variant="contained" color="primary"
+                        onClick={this.handleLogIn} className={classes.submit}>
                             Log in
-                            {/* <Link to='/Profile'>Log In</Link> */}
                         </Button>
-
-                        <div>Don't Have an Account? Create one now!</div>
-                        <Button type="secondary" >
-                            <Link to='/NewUser'>Register</Link>
-                        </Button>
-
-                </Form>
-               
+                        <Container maxWidth="sm">
+                            <Container item>
+                                <Link to="/">
+                                    Forgot password?
+                                </Link>
+                            </Container>
+                            <Container item>
+                                <Link to="/NewUser">Don't have an account? Sign up</Link>
+                            </Container>
+                        </Container>
+                        </div>              
             </div>
         )
     }
@@ -144,3 +175,10 @@ class LogIn extends React.Component{
 }
 
 export default LogIn;
+
+/*
+<div>Don't Have an Account? Create one now!</div>
+                        <Button type="secondary" >
+                            <Link to='/NewUser'>Register</Link>
+                        </Button>
+*/
