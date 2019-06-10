@@ -1,6 +1,6 @@
 import React from 'react';
-import 'antd/dist/antd.css';
-import './login.css';
+
+// import './login.css';
 import { BrowserRouter as Router, Route, Link } from 'react-router-dom'
 //import { Form, Input, Button, Select } from 'antd';
 import {Snackbar, TextField, Button, IconButton} from '@material-ui/core/';
