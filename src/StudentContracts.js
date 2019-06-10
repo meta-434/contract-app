@@ -22,6 +22,7 @@ import FilterListIcon from "@material-ui/icons/FilterList";
 import Container from "@material-ui/core/Container";
 import Button from "@material-ui/core/Button";
 
+//map data types from firebase to columns 
 function createData(name, calories, fat, carbs, protein) {
   return { name, calories, fat, carbs, protein };
 }
@@ -30,6 +31,7 @@ function createData(name, calories, fat, carbs, protein) {
 
 // createData("CompanyName", title, details, contractStartDate, contractEndDate, bidCloseDate)
 
+//map data in firebase to an array of createData() methods
 const rows = [
   createData("Cupcake", 305, 3.7, 67, 4.3),
   createData("Donut", 452, 25.0, 51, 4.9),
