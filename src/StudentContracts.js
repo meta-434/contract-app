@@ -71,6 +71,7 @@ function getSorting(order, orderBy) {
     : (a, b) => -desc(a, b, orderBy);
 }
 
+// replace with relevant data for table sorting
 const headRows = [
   {
     id: "name",
@@ -105,7 +106,7 @@ function EnhancedTableHead(props) {
             indeterminate={numSelected > 0 && numSelected < rowCount}
             checked={numSelected === rowCount}
             onChange={onSelectAllClick}
-            inputProps={{ "aria-label": "Select all desserts" }}
+            inputProps={{ "aria-label": "Select all contracts" }}
           />
         </TableCell>
         {headRows.map(row => (
@@ -237,7 +238,7 @@ const useStyles = makeStyles(theme => ({
 function EnhancedTable() {
   const classes = useStyles();
   const [order, setOrder] = React.useState("asc");
-  const [orderBy, setOrderBy] = React.useState("calories");
+  const [orderBy, setOrderBy] = React.useState("bid close date");
   const [selected, setSelected] = React.useState([]);
   const [page, setPage] = React.useState(0);
   const [dense, setDense] = React.useState(false);
