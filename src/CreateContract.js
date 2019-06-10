@@ -62,8 +62,11 @@ export default class CreateContract extends React.Component {
 
   render() {
     return(
-
+      
       <Grid container spacing={2}>
+      <Grid item xs={12}>
+        <h1>Contract Form</h1>
+        </Grid>
         <Grid item xs={12}>
           <TextField
             label="Title"

@@ -11,7 +11,7 @@ import Tooltip from "@material-ui/core/Tooltip";
 import Menu from "@material-ui/core/Menu";
 import MenuItem from "@material-ui/core/MenuItem";
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
-
+import CompanyProfile from './CompanyProfile.js';
 const useStyles = makeStyles(theme => ({
   root: {
     flexGrow: 1
@@ -82,9 +82,10 @@ function DenseAppBar() {
                 <Link to="/logout" style={{ textDecoration: "none", color: 'black' }}>
                   <MenuItem>Logout</MenuItem>
                 </Link>
+                
               </Menu>
             </div>
-
+            
             <Typography variant="h6" color="inherit" className={classes.title}>
               RevTek Internships
             </Typography>
@@ -102,6 +103,7 @@ function DenseAppBar() {
             </Tooltip>
           </Toolbar>
         </AppBar>
+        <Route exact path="/contracts" component={CompanyProfile}/>
       </Router>
     </div>
   );
