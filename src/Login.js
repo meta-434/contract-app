@@ -1,7 +1,7 @@
 // Login
 import React from 'react';
 import 'antd/dist/antd.css';
-import './login.css';
+// import './login.css';
 import { Form, Icon, Input, Button, Alert, message } from 'antd';
 import NewUser from "./NewUser.js";
 //import Profile from './Profile.js';

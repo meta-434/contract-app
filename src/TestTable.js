@@ -1,17 +1,14 @@
 import React, { Component } from "react";
-import config from "./firebase";
-
+import firebase from "./firebase";
 class TestTable extends Component {
   cnx = () => {
-    firebase.initializeApp(config);
-    database = firebase.database();
-
-    var ref = database.ref("users");
-    ref.on("value", gotData, errData);
+    const db = firebase.database().ref("users");
+    db.on("value", this.gotData, this.errData);
   };
 
   gotData(data) {
-    console.log(data);
+    console.log("connection established!");
+    console.log(data.val());
   }
 
   errData(err) {
@@ -20,9 +17,10 @@ class TestTable extends Component {
   }
 
   render() {
+    this.cnx();
     return (
       <div>
-        <p>test tabfirebase.initializeApp(config);le</p>
+        <p>test </p>
       </div>
     );
   }

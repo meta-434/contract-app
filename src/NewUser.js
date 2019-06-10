@@ -1,10 +1,10 @@
 import React from "react";
 import "antd/dist/antd.css";
-import "./login.css";
+// import "./login.css";
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 //import { Form, Input, Button, Select } from 'antd';
-import {Snackbar, TextField, Button, IconButton} from '@material-ui/core/';
-import {CloseIcon} from '@material-ui/icons/Close';
+import { Snackbar, TextField, Button, IconButton } from "@material-ui/core/";
+import { CloseIcon } from "@material-ui/icons/Close";
 import firebase from "./firebase.js";
 import AppHeaderBar from "./AppHeaderBar";
 
@@ -68,58 +68,14 @@ export default class NewAccount extends React.Component {
       });
   };
 
-    
-    studentOutput = () => {
-        return(
-        <div className='login'>
+  studentOutput = () => {
+    return (
+      <div className="login">
         <TextField
-                placeholder="Name"
-                onChange={(e)=>this.changeName(e.target.value)}
-            />
-            <br></br>
-            <TextField
-                placeholder="Username (Email)"
-                onChange={(e)=>this.changeUsername(e.target.value)}
-            />
-            <br></br>
-            <TextField
-                placeholder="Password"
-                type="password"
-                onChange={(e)=>this.changePassword(e.target.value)}
-            />
-            <br></br>
-            <TextField
-                placeholder="Github url"
-                onChange={(e)=>this.changeGithub(e.target.value)}
-            />
-            <br></br>
-            <TextField
-                placeholder="LinkedIn url"
-                onChange={(e)=>this.changeLinkedIn(e.target.value)}
-            />
-            <br></br>
-            
-            <Button 
-                component="button"
-                type="submit"
-                color="primary"
-                variant = "outlined"
-                onClick={this.createAccount}> 
-                <Link to='/'>Submit</Link>
-            </Button>
-            </div>
-        )
-    }
-    handleCompanyType = () => {
-        this.setState({
-            type : handleUser("company"),
-            company_clicked : true,
-            student_clicked : false,
-        })
-    }
-    companyOutput = () => {
-        return(
-        <div className='login'>
+          placeholder="Name"
+          onChange={e => this.changeName(e.target.value)}
+        />
+        <br />
         <TextField
           placeholder="Username (Email)"
           onChange={e => this.changeUsername(e.target.value)}
@@ -142,12 +98,60 @@ export default class NewAccount extends React.Component {
         />
         <br />
 
-render(){
-    console.log()
-    return(
+        <Button
+          component="button"
+          type="submit"
+          color="primary"
+          variant="outlined"
+          onClick={this.createAccount}
+        >
+          <Link to="/">Submit</Link>
+        </Button>
+      </div>
+    );
+  };
+  handleCompanyType = () => {
+    this.setState({
+      type: handleUser("company"),
+      company_clicked: true,
+      student_clicked: false
+    });
+  };
+  companyOutput = () => {
+    return (
+      <div className="login">
+        <TextField
+          placeholder="Username (Email)"
+          onChange={e => this.changeUsername(e.target.value)}
+        />
+        <br />
+        <TextField
+          placeholder="Password"
+          type="password"
+          onChange={e => this.changePassword(e.target.value)}
+        />
+        <br />
+        <TextField
+          placeholder="Github url"
+          onChange={e => this.changeGithub(e.target.value)}
+        />
+        <br />
+        <TextField
+          placeholder="LinkedIn url"
+          onChange={e => this.changeLinkedIn(e.target.value)}
+        />
+        <br />
+      </div>
+    );
+  };
+
+  render() {
+    console.log();
+    return (
+      <div>
         <div className="login">
-        <h3>Please Enter Your Information:</h3>
-        <div>
+          <h3>Please Enter Your Information:</h3>
+          <div>
             Choose an Account Type
             <br />
             <Button
@@ -174,13 +178,11 @@ render(){
         </div>
         <div>{this.state.student_clicked ? this.studentOutput() : null}</div>
         <div>{this.state.company_clicked ? this.companyOutput() : null}</div>
-            
+      </div>
+    );
+  }
 
-
-        </div>
-    )
-}
-changeName = (input) => {
+  changeName = input => {
     this.setState({
       name: input
     });

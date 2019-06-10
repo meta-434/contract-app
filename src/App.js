@@ -24,7 +24,7 @@ function App() {
       {/* <Home /> */}
       {/*<CompanyProfile/>*/}
       {/* <StudentContracts /> */}
-      <Login />
+      {/* <Login /> */}
     </div>
   );
 }
