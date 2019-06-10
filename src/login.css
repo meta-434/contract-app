@@ -3,7 +3,15 @@
     align-items: center;
     flex-direction: column;
     justify-content: space-evenly;
+    margin: 100px;
+}
 
+.newUser{
+  margin: 50px;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  justify-content: space-evenly;
 }
 
 .login-form {
@@ -13,6 +21,12 @@
     align-items: center;
     justify-content: space-evenly;
     width: 400px;
+  }
+
+  .user-form{
+      display: flex;
+      flex-direction: column;
+      justify-content: space-evenly;
   }
   .login-form-forgot {
     float: right;

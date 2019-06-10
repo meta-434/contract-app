@@ -4,7 +4,6 @@ import './login.css';
 import { BrowserRouter as Router, Route, Link } from 'react-router-dom'
 //import { Form, Input, Button, Select } from 'antd';
 import {Snackbar, TextField, Button, IconButton} from '@material-ui/core/';
-import {CloseIcon} from '@material-ui/icons/Close';
 import firebase from "./firebase.js";
 
 function handleUser(type){
@@ -70,7 +69,7 @@ export default class NewAccount extends React.Component {
     
     studentOutput = () => {
         return(
-        <div className='login'>
+        <div className='newUser'>
         <TextField
                 placeholder="Name"
                 onChange={(e)=>this.changeName(e.target.value)}
@@ -118,7 +117,7 @@ export default class NewAccount extends React.Component {
     }
     companyOutput = () => {
         return(
-        <div className='login'>
+        <div className='newUser'>
         <TextField
                 placeholder="Company Name"
                 onChange={(e)=>this.changeName(e.target.value)}
@@ -151,7 +150,7 @@ export default class NewAccount extends React.Component {
 render(){
     console.log()
     return(
-        <div className="login">
+        <div className="newUser">
         <h3>Please Enter Your Information:</h3>
         <div>
             Choose an Account Type
@@ -175,8 +174,6 @@ render(){
         </div>
         <div>{this.state.student_clicked ? this.studentOutput() : null}</div>
         <div>{this.state.company_clicked ? this.companyOutput() : null}</div>
-            
-
 
         </div>
     )
