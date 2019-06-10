@@ -11,8 +11,10 @@ function App() {
   return (
      
     <div>
-     <Home />
+      {/* <Home /> */}
       {/*<CompanyProfile/>*/}
+      <StudentCard/>
+
     </div>
   );
 }
