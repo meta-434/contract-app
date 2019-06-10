@@ -6,13 +6,21 @@ import CompanyProfile from "./CompanyProfile.js";
 // import StudentContracts from './StudentContracts';
 import StudentCard from "./StudentCard.js";
 import Home from "./Home.js";
-import StudentContracts from "./StudentContracts.js";
-import AppHeaderBar from "./AppHeaderBar";
+import NewUser from "./NewUser";
 import Login from "./Login";
+import TestTable from "./TestTable";
+
+import { BrowserRouter as Router, Route, Path, Link } from "react-router-dom";
+
 function App() {
   return (
     <div>
-      <AppHeaderBar />
+      <TestTable />
+      {/* <Router>
+        <Route exact path="/" component={Home} />
+        <Route exact path="/Newuser" component={NewUser} />
+        <Route exact path="/Login" component={Login} />
+      </Router> */}
       {/* <Home /> */}
       {/*<CompanyProfile/>*/}
       {/* <StudentContracts /> */}
