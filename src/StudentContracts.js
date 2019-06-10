@@ -30,8 +30,22 @@ function createData(name, calories, fat, carbs, protein) {
 // map data in firebase to an array of createData() methods
 // createData("CompanyName", title, details, contractStartDate, contractEndDate, bidCloseDate)
 const rows = [
-  createData("Cupcake", 305, 3.7, 67, 4.3),
-  createData("Donut", 452, 25.0, 51, 4.9),
+  createData(
+    "Test Company",
+    "Test Contract #1",
+    "https://docs.google.com/document/d/1incC4lnkQjx2WmK8gT4U-UybYIflq8AqsXFaBkAuVFU/edit?usp=sharing",
+    20190619,
+    20190831,
+    20190515
+  ),
+  createData(
+    "Test Non-Profit",
+    "Test Contract #2",
+    "https://docs.google.com/document/d/1incC4lnkQjx2WmK8gT4U-UybYIflq8AqsXFaBkAuVFU/edit?usp=sharing",
+    20190623,
+    20190915,
+    20190522
+  ),
   createData("Eclair", 262, 16.0, 24, 6.0),
   createData("Frozen yoghurt", 159, 6.0, 24, 4.0),
   createData("Gingerbread", 356, 16.0, 49, 3.9),
@@ -77,12 +91,23 @@ const headRows = [
     id: "name",
     numeric: false,
     disablePadding: true,
-    label: "Dessert (100g serving)"
+    label: "issuing company"
   },
-  { id: "calories", numeric: true, disablePadding: false, label: "Calories" },
-  { id: "fat", numeric: true, disablePadding: false, label: "Fat (g)" },
-  { id: "carbs", numeric: true, disablePadding: false, label: "Carbs (g)" },
-  { id: "protein", numeric: true, disablePadding: false, label: "Protein (g)" }
+  { id: "title", numeric: false, disablePadding: false, label: "title" },
+  { id: "details", numeric: false, disablePadding: false, label: "details (google drive links only)" },
+  {
+    id: "start date",
+    numeric: true,
+    disablePadding: false,
+    label: "start date"
+  },
+  { id: "end date", numeric: true, disablePadding: false, label: "end date" },
+  {
+    id: "submission close",
+    numeric: true,
+    disablePadding: false,
+    label: "submission close"
+  }
 ];
 
 function EnhancedTableHead(props) {

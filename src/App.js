@@ -8,14 +8,15 @@ import StudentCard from "./StudentCard.js";
 import Home from "./Home.js";
 import StudentContracts from "./StudentContracts.js";
 import AppHeaderBar from "./AppHeaderBar";
-
+import Login from "./Login";
 function App() {
   return (
     <div>
       <AppHeaderBar />
       {/* <Home /> */}
       {/*<CompanyProfile/>*/}
-      <StudentContracts />
+      {/* <StudentContracts /> */}
+      <Login />
     </div>
   );
 }
