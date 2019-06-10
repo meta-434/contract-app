@@ -10,12 +10,15 @@ import Typography from '@material-ui/core/Typography';
 
 const useStyles = makeStyles({
     card: {
-      maxWidth: 345,
+      maxWidth: 300,
+      textAlign: 'center',
     },
     media: {
       height: 200,
       width: 200,
-      borderRadius:100
+      borderRadius:100,
+      marginLeft: 'auto', // used to center image on card
+      marginRight:'auto'
     },
 });
 
@@ -35,6 +38,7 @@ export default function StudentCard() {
               Nicolas Cage
             </Typography>
             <Typography variant="body2" color="textSecondary" component="p">
+              Computer Science Major at UVA <br/>  
               Github: https://github.com/mawilliams098 <br/>
               LinkedIn: https://www.linkedin.com/feed/
             </Typography>
