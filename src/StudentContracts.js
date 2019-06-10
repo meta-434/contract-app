@@ -22,16 +22,13 @@ import FilterListIcon from "@material-ui/icons/FilterList";
 import Container from "@material-ui/core/Container";
 import Button from "@material-ui/core/Button";
 
-//map data types from firebase to columns 
+//map data types from firebase to columns
 function createData(name, calories, fat, carbs, protein) {
   return { name, calories, fat, carbs, protein };
 }
 
-// Our data would need to be sorted as follows:
-
+// map data in firebase to an array of createData() methods
 // createData("CompanyName", title, details, contractStartDate, contractEndDate, bidCloseDate)
-
-//map data in firebase to an array of createData() methods
 const rows = [
   createData("Cupcake", 305, 3.7, 67, 4.3),
   createData("Donut", 452, 25.0, 51, 4.9),
@@ -384,8 +381,8 @@ function EnhancedTable() {
           label="Dense padding"
         />
         <Button variant="contained" color="primary" className={classes.button}>
-        Submit Bid
-      </Button>
+          Submit Bid
+        </Button>
       </div>
     </Container>
   );
