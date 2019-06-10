@@ -52,10 +52,11 @@ function CompanyProfile() {
 					</Button>
 					<Route path="/CreateContract" component={CreateContract}/>
 					<h1>Current Contracts</h1>
-					{getData().map(entry => {
+					
+					{contracts.map(entry => {
 						console.log(entry)
 						return <p>{"hi" + entry}</p>
-						})}
+					})}
             <List alignItems="flex-start">
 								
                 <ListItem>
