@@ -14,6 +14,8 @@ const useStyles = makeStyles({
     },
     media: {
       height: 200,
+      width: 200,
+      borderRadius:100
     },
 });
 
@@ -30,11 +32,11 @@ export default function StudentCard() {
           />
           <CardContent>
             <Typography gutterBottom variant="h5" component="h2">
-              Student Name
+              Nicolas Cage
             </Typography>
             <Typography variant="body2" color="textSecondary" component="p">
-              Lizards are a widespread group of squamate reptiles, with over 6,000 species, ranging
-              across all continents except Antarctica
+              Github: https://github.com/mawilliams098 <br/>
+              LinkedIn: https://www.linkedin.com/feed/
             </Typography>
           </CardContent>
         </CardActionArea>
