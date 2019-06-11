@@ -83,6 +83,11 @@ class StudentBid extends React.Component {
         })
     }
 
+    handleClick = () => {
+        // send bid info to firebase as object on same level as student (including user ID)
+
+    }
+
     render(){
         console.log(this.state);
         return (
@@ -129,7 +134,11 @@ class StudentBid extends React.Component {
                             onChange={this.handleAmountChange}
                         />
                     </FormControl>
-                    <Button variant="contained" className={classes.button}>
+                    <Button 
+                        variant="contained" 
+                        className={classes.button}
+                        onClick={this.handleClick}
+                    >
                         Submit
                     </Button>
                 </form>
