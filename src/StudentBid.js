@@ -52,14 +52,17 @@ const classes = makeStyles(theme => ({
 
 class StudentBid extends React.Component {
 
-    state = {
-        amount: '',
-        startDate: '',
-        endDate: '',
-        // password: '',
-        // weight: '',
-        // weightRange: '',
-        // showPassword: false,
+    constructor(props) {
+        super(props);
+        this.state = {
+            amount: '',
+            startDate: '',
+            endDate: '',
+            // password: '',
+            // weight: '',
+            // weightRange: '',
+            // showPassword: false,
+        }
     }
 
     handleAmountChange = (event) => {
@@ -81,6 +84,7 @@ class StudentBid extends React.Component {
     }
 
     render(){
+        console.log(this.state);
         return (
             <div>
                 {/* Somehow render details of contract selected from StudentContracts.js */}
@@ -114,15 +118,15 @@ class StudentBid extends React.Component {
                         InputLabelProps={{
                         shrink: true,
                         }}
-                        onChange={this.handleStartDateChange}
+                        onChange={this.handleEndDateChange}
                     />
                     <FormControl className={classes.margin}>
                         <InputLabel htmlFor="adornment-amount">Amount</InputLabel>
                         <Input
                             id="adornment-amount"
                             value={this.state.amount}
-                            onChange={this.handleAmountChange}
                             startAdornment={<InputAdornment position="start">$</InputAdornment>}
+                            onChange={this.handleAmountChange}
                         />
                     </FormControl>
                     <Button variant="contained" className={classes.button}>
