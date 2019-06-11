@@ -1,76 +1,76 @@
 .login {
-    display: flex;
-    align-items: center;
-    flex-direction: column;
-    justify-content: space-evenly;
-    margin: 100px;
-}
-
-.new-user-page{
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: space-around;
-  margin:75px;
-}
-
-.newUser{
-  margin: 50px;
   display: flex;
   align-items: center;
   flex-direction: column;
   justify-content: space-evenly;
+  margin: 100px;
+}
+
+.new-user-page{
+display: flex;
+flex-direction: row;
+align-items: center;
+justify-content: space-around;
+margin:75px;
+}
+
+.newUser{
+margin: 50px;
+display: flex;
+align-items: center;
+flex-direction: column;
+justify-content: space-evenly;
 }
 .userPlacement{
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
+display: flex;
+flex-direction: column;
+justify-content: center;
 }
 
 .instruction{
-  max-width: 400px;
-  margin:50px;
-  background: blue;
+max-width: 400px;
+margin:50px;
+background: blue;
 }
 
 .login-form {
-    text-align: center;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-evenly;
+  width: 400px;
+}
+
+.user-form{
     display: flex;
     flex-direction: column;
-    align-items: center;
     justify-content: space-evenly;
-    width: 400px;
-  }
+}
+.login-form-forgot {
+  float: right;
+}
+.login-form-button {
+  width: 100%;
+}
 
-  .user-form{
-      display: flex;
-      flex-direction: column;
-      justify-content: space-evenly;
-  }
-  .login-form-forgot {
-    float: right;
-  }
-  .login-form-button {
-    width: 100%;
-  }
+.grid-items{
+  width: 600px;
+  flex-direction: row;
+  justify-content: space-evenly;
 
-  .grid-items{
-    width: 600px;
-    flex-direction: row;
-    justify-content: space-evenly;
+}
 
-  }
+h1 {
+  font-size: 70px;
+  font-family: Impact;
+}
 
-  h1 {
-    font-size: 70px;
-    font-family: Impact;
-  }
+h2 {
+  font-size: 50px;
+  font-family: Impact;
+}
 
-  h2 {
-    font-size: 50px;
-    font-family: Impact;
-  }
-
-  .temp{
-    text-align: right;
-  }
+.temp{
+  text-align: right;
+}
