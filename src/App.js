@@ -13,11 +13,18 @@ import { BrowserRouter as Router, Route } from "react-router-dom";
 function App() {
   return (
     <div>
+<<<<<<< HEAD
+      {/* <Home /> */}
+      {/*<CompanyProfile/>*/}
+      <StudentCard/>
+
+=======
       <Router>
         <Route exact path="/" component={Login} />
         <Route exact path="/NewUser" component={NewUser} />
       </Router>
       {/* <Home /> */}
+>>>>>>> e4e06b1c3c78ea776797b4e7b3e0d819698a1c68
     </div>
   );
 }
