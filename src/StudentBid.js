@@ -2,7 +2,6 @@ import React, { Component } from 'react'
 import { makeStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
-import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
 
 import Input from '@material-ui/core/Input';
@@ -51,20 +50,37 @@ const classes = makeStyles(theme => ({
 }));
 
 
-
 class StudentBid extends React.Component {
 
     state = {
         amount: '',
-        password: '',
-        weight: '',
-        weightRange: '',
-        showPassword: false,
+        startDate: '',
+        endDate: '',
+        // password: '',
+        // weight: '',
+        // weightRange: '',
+        // showPassword: false,
+    }
+
+    handleAmountChange = (event) => {
+        this.setState({
+            amount: event.target.value
+        })
+    }
+
+    handleStartDateChange = (event) => {
+        this.setState({
+            startDate: event.target.value
+        })
+    }
+
+    handleEndDateChange = (event) => {
+        this.setState({
+            endDate: event.target.value
+        })
     }
 
     render(){
-
-    
         return (
             <div>
                 {/* Somehow render details of contract selected from StudentContracts.js */}
@@ -88,6 +104,7 @@ class StudentBid extends React.Component {
                         InputLabelProps={{
                         shrink: true,
                         }}
+                        onChange={this.handleStartDateChange}
                     />
                     <TextField
                         id="date"
@@ -97,13 +114,14 @@ class StudentBid extends React.Component {
                         InputLabelProps={{
                         shrink: true,
                         }}
+                        onChange={this.handleStartDateChange}
                     />
                     <FormControl className={classes.margin}>
                         <InputLabel htmlFor="adornment-amount">Amount</InputLabel>
                         <Input
                             id="adornment-amount"
                             value={this.state.amount}
-                            //onChange={handleChange('amount')}
+                            onChange={this.handleAmountChange}
                             startAdornment={<InputAdornment position="start">$</InputAdornment>}
                         />
                     </FormControl>
