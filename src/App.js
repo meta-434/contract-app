@@ -4,27 +4,20 @@ import CompanyProfile from "./CompanyProfile.js";
 // import StudentProfile from './StudentProfile';
 // import StudentBid from './StudentBid';
 // import StudentContracts from './StudentContracts';
-import StudentCard from "./StudentCard.js";
-import Home from "./Home.js";
-import Login from "./Login";
-import NewUser from "./NewUser";
-import { BrowserRouter as Router, Route } from "react-router-dom";
+import StudentCard from './StudentCard.js'
+import Login from './Login.js'
+import NewUser from './NewUser.js'
+import { BrowserRouter as Router, Route, Link } from 'react-router-dom'
+import Home from "./Home.js"
 
 function App() {
   return (
     <div>
-<<<<<<< HEAD
-      {/* <Home /> */}
-      {/*<CompanyProfile/>*/}
-      <StudentCard/>
+     <Router>
+         <Route exact path="/" component={Login} />
+         <Route exact path="/NewUser" component={NewUser} />
+      </ Router>
 
-=======
-      <Router>
-        <Route exact path="/" component={Login} />
-        <Route exact path="/NewUser" component={NewUser} />
-      </Router>
-      {/* <Home /> */}
->>>>>>> e4e06b1c3c78ea776797b4e7b3e0d819698a1c68
     </div>
   );
 }
