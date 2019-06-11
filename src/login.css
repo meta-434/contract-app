@@ -6,12 +6,31 @@
     margin: 100px;
 }
 
+.new-user-page{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-around;
+  margin:75px;
+}
+
 .newUser{
   margin: 50px;
   display: flex;
   align-items: center;
   flex-direction: column;
   justify-content: space-evenly;
+}
+.userPlacement{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.instruction{
+  max-width: 400px;
+  margin:50px;
+  background: blue;
 }
 
 .login-form {

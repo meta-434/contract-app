@@ -3,8 +3,22 @@ import 'antd/dist/antd.css';
 import './login.css';
 import { BrowserRouter as Router, Route, Link } from 'react-router-dom'
 //import { Form, Input, Button, Select } from 'antd';
-import {Snackbar, TextField, Button, IconButton} from '@material-ui/core/';
+import {makeStyles, TextField, Button, Paper, Card} from '@material-ui/core/';
 import firebase from "./firebase.js";
+
+
+const useStyles = makeStyles(theme => ({
+    root: {
+      flexGrow: 1,
+      overflow: 'hidden',
+      padding: theme.spacing(0, 3),
+    },
+    paper: {
+      maxWidth: 400,
+      margin: `${theme.spacing(1)}px auto`,
+      padding: theme.spacing(2),
+    },
+  }));
 
 function handleUser(type){
     return type;
@@ -14,6 +28,7 @@ function handleClose(event, reason) {
       return;
     }
 }
+
 
 export default class NewAccount extends React.Component {
     constructor(props){
@@ -29,6 +44,12 @@ export default class NewAccount extends React.Component {
         company_clicked : false,
     }
 }
+
+    classes = () => {
+        const classes = useStyles();
+        return(classes);
+    }
+
     createAccount = () => { 
         firebase.auth().createUserWithEmailAndPassword(this.state.username, this.state.password)
         .then(data => {
@@ -150,11 +171,14 @@ export default class NewAccount extends React.Component {
 render(){
     console.log()
     return(
+        <div className="new-user-page">
+        <Card minWidth='400'>
         <div className="newUser">
         <h3>Please Enter Your Information:</h3>
-        <div>
+        <div className="userPlacement">
             Choose an Account Type
             <br></br>
+            <div>
             <Button 
                 component="button"
                 type="submit"
@@ -171,11 +195,14 @@ render(){
                 onClick={this.handleCompanyType}> 
                 Company
             </Button>
+            </div>
         </div>
         <div>{this.state.student_clicked ? this.studentOutput() : null}</div>
         <div>{this.state.company_clicked ? this.companyOutput() : null}</div>
-
         </div>
+        </Card>
+        </div>
+        
     )
 }
 changeName = (input) => {

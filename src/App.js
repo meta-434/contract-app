@@ -1,6 +1,6 @@
-import React from 'react';
-import './App.css';
-import CompanyProfile from './CompanyProfile.js';
+import React from "react";
+import "./App.css";
+import CompanyProfile from "./CompanyProfile.js";
 // import StudentProfile from './StudentProfile';
 // import StudentBid from './StudentBid';
 // import StudentContracts from './StudentContracts';
@@ -12,7 +12,6 @@ import Home from "./Home.js"
 
 function App() {
   return (
-     
     <div>
      <Router>
          <Route exact path="/" component={Login} />
