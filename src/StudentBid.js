@@ -10,9 +10,8 @@ import InputLabel from '@material-ui/core/InputLabel';
 import InputAdornment from '@material-ui/core/InputAdornment';
 import FormControl from '@material-ui/core/FormControl';
 
-
 // material UI setup & text field setup
-const useStyles = makeStyles(theme => ({
+const classes = makeStyles(theme => ({
     button: {
       margin: theme.spacing(1),
     },
@@ -51,35 +50,34 @@ const useStyles = makeStyles(theme => ({
     },
 }));
 
-function StudentBid(props) {
-    const classes = useStyles();
-    const [values, setValues] = React.useState({
+
+
+class StudentBid extends React.Component {
+
+    state = {
         amount: '',
         password: '',
         weight: '',
         weightRange: '',
         showPassword: false,
-      });
-    const handleChange = name => event => {
-        setValues({ ...values, [name]: event.target.value });
-    };   
+    }
+
+    render(){
+
+    
         return (
             <div>
                 {/* Somehow render details of contract selected from StudentContracts.js */}
-                <Paper className={classes.root}>
-                    <Typography variant="h3" component="h3">
-                        Contract Details
-                    </Typography>
-                </Paper>
-               
+                <Typography variant="h3" component="h3">
+                    Contract Details
+                </Typography>
+             
                 <p style={{paddingLeft:20, paddingBottom:20,}}> ~query contract details from selected contract here~ </p>
 
-                <Paper className={classes.root}>
-                    <Typography variant="h3" component="h3">
-                        Submit Your Bid
-                    </Typography>
-                </Paper>
-
+                <Typography variant="h3" component="h3">
+                    Submit Your Bid
+                </Typography>
+                
                 {/* Submit a bid for that contract to the company (once approved?) */}
                 <form className={classes.container} noValidate autoComplete="off">
                     <TextField
@@ -104,8 +102,8 @@ function StudentBid(props) {
                         <InputLabel htmlFor="adornment-amount">Amount</InputLabel>
                         <Input
                             id="adornment-amount"
-                            value={values.amount}
-                            onChange={handleChange('amount')}
+                            value={this.state.amount}
+                            //onChange={handleChange('amount')}
                             startAdornment={<InputAdornment position="start">$</InputAdornment>}
                         />
                     </FormControl>
@@ -115,7 +113,7 @@ function StudentBid(props) {
                 </form>
             </div>
         )
-    
+    }    
 }
 
 export default StudentBid
