@@ -2,8 +2,8 @@ import React from "react";
 import "./App.css";
 import CompanyProfile from "./CompanyProfile.js";
 // import StudentProfile from './StudentProfile';
-// import StudentBid from './StudentBid';
-// import StudentContracts from './StudentContracts';
+import StudentBid from './StudentBid';
+import StudentContracts from './StudentContracts';
 import StudentCard from "./StudentCard.js";
 import Home from "./Home.js";
 import Login from "./Login";
@@ -16,7 +16,8 @@ function App() {
       <Router>
         <Route exact path="/" component={Login} />
         <Route exact path="/NewUser" component={NewUser} />
-      </Router>
+        <Route exact path="/StudentBid" component={StudentBid} />
+      </Router> 
       {/* <Home /> */}
     </div>
   );

@@ -62,8 +62,7 @@ function StudentBid(props) {
       });
     const handleChange = name => event => {
         setValues({ ...values, [name]: event.target.value });
-    };
-   
+    };   
         return (
             <div>
                 {/* Somehow render details of contract selected from StudentContracts.js */}
@@ -114,9 +113,6 @@ function StudentBid(props) {
                         Submit
                     </Button>
                 </form>
-
-
-
             </div>
         )
     
