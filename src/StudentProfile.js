@@ -13,7 +13,7 @@ import { flexbox } from '@material-ui/system';
 
 
 // material UI setup
-const useStyles = makeStyles(theme => ({
+const classes = makeStyles(theme => ({
     button: {
         margin: theme.spacing(1),
         // justifyContent: 'flex-end',
@@ -29,9 +29,18 @@ const useStyles = makeStyles(theme => ({
     },
 }));
 
-function StudentProfile(props) {
-    const classes = useStyles();
-  
+
+class StudentProfile extends React.Component {
+
+    constructor(props) {
+        super(props);
+        this.state = {
+
+        }
+    }
+
+   
+    render() {
         return (
             <div>
                 <Grid>
@@ -51,9 +60,6 @@ function StudentProfile(props) {
                             <ListItemText primary="Email:" />
                         </ListItem>
                         <Divider />
-                        <ListItem button divider>
-                            <ListItemText primary="Phone:" />
-                        </ListItem>
                         <ListItem button>
                             <ListItemText primary="GitHub:" />
                         </ListItem>
@@ -61,7 +67,7 @@ function StudentProfile(props) {
                         <ListItem button>
                             <ListItemText primary="LinkedIn:" />
                         </ListItem>
-                        </List>
+                    </List>
 
                     {/* Contracts list only Available if user is logged in */}
                     {/* Ideally this will be material-UI talbe */}
@@ -70,7 +76,8 @@ function StudentProfile(props) {
 
                
             </div>
-        )     
+        )
+    }         
 }
 
 export default StudentProfile
