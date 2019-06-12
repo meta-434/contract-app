@@ -18,6 +18,7 @@ function App() {
         <Route exact path="/" component={Login} />
         <Route exact path="/NewUser" component={NewUser} />
         <Route exact path="/StudentBid" component={StudentBid} />
+        
         <Route exact path="/StudentProfile" component={StudentProfile} />
       </Router> 
       {/* <Home /> */}
