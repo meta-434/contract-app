@@ -91,6 +91,7 @@ export default class NewAccount extends React.Component {
     studentOutput = () => {
         return(
         <div className='newUser'>
+            <h4>New Student</h4>
         <TextField
                 placeholder="Name"
                 onChange={(e)=>this.changeName(e.target.value)}
@@ -124,7 +125,7 @@ export default class NewAccount extends React.Component {
                 color="primary"
                 variant = "outlined"
                 onClick={this.createAccount}> 
-                <Link to='/'>Submit</Link>
+                <Link to='/' style={{color:"#0077B5"}}>Submit</Link>
             </Button>
             </div>
         )
@@ -139,6 +140,7 @@ export default class NewAccount extends React.Component {
     companyOutput = () => {
         return(
         <div className='newUser'>
+            <h4>New Company</h4>
         <TextField
                 placeholder="Company Name"
                 onChange={(e)=>this.changeName(e.target.value)}
@@ -162,7 +164,7 @@ export default class NewAccount extends React.Component {
                 color="primary"
                 variant = "outlined"
                 onClick={this.createAccount}> 
-                <Link to='/'>Submit</Link>
+                <Link to='/' style={{color:"#0077B5"}}>Submit</Link>
             </Button>
             </div>
         )
@@ -172,7 +174,8 @@ render(){
     console.log()
     return(
         <div className="new-user-page">
-        <Card minWidth='400'>
+        <div className='company-name2'>Rev<b className='tech'>Tech</b></div>
+        <Card style={{width: 400}}>
         <div className="newUser">
         <h3>Please Enter Your Information:</h3>
         <div className="userPlacement">
@@ -184,7 +187,8 @@ render(){
                 type="submit"
                 color="primary"
                 variant = "outlined"
-                onClick={this.handleStudentType}> 
+                onClick={this.handleStudentType}
+                style={{color:"#0077B5"}}> 
                 Student
             </Button>
             <Button 
@@ -192,7 +196,8 @@ render(){
                 type="submit"
                 color="primary"
                 variant = "outlined"
-                onClick={this.handleCompanyType}> 
+                onClick={this.handleCompanyType}
+                style={{color:"#0077B5"}}> 
                 Company
             </Button>
             </div>
@@ -202,7 +207,6 @@ render(){
         </div>
         </Card>
         </div>
-        
     )
 }
 changeName = (input) => {

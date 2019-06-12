@@ -1,3 +1,22 @@
+
+.company-name{
+  font-size: 15px;
+  font-weight: bold;
+}
+.company-name2{
+  font-size: 30px;
+  font-weight: bold;
+  margin: 25px;
+}
+.tech{
+  background-color: #0077B5;
+  color: white;
+}
+.greeting{
+  font-size: 30px;
+  font-weight: bold;
+}
+
 .login {
   display: flex;
   align-items: center;
@@ -8,14 +27,14 @@
 
 .new-user-page{
 display: flex;
-flex-direction: row;
+flex-direction: column;
 align-items: center;
 justify-content: space-around;
 margin:75px;
 }
 
 .newUser{
-margin: 50px;
+margin: 40px;
 display: flex;
 align-items: center;
 flex-direction: column;
