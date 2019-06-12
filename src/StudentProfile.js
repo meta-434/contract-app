@@ -11,12 +11,13 @@ import Divider from '@material-ui/core/Divider';
 import Grid from '@material-ui/core/Grid';
 import { flexbox } from '@material-ui/system';
 
+import firebase from "./firebase.js";
+import { getDefaultWatermarks } from 'istanbul-lib-report';
 
 // material UI setup
 const classes = makeStyles(theme => ({
     button: {
         margin: theme.spacing(1),
-        // justifyContent: 'flex-end',
     },
     input: {
         display: 'none',
@@ -25,22 +26,45 @@ const classes = makeStyles(theme => ({
         width: '100%',
         maxWidth: '360px',
         backgroundColor: theme.palette.background.paper,
-        // justifyContent: 'center',
     },
 }));
 
-
 class StudentProfile extends React.Component {
-
+    
     constructor(props) {
         super(props);
         this.state = {
-
+            name: '', 
+            github: '', 
+            linkedin: '',
+            student: [],
         }
     }
 
-   
+    componentDidMount() {
+        //Get the current userID
+        var userId = firebase.auth().currentUser.uid;
+        var studentRef = firebase.database().ref('/users/' + '/student' + userId);
+        studentRef.on('value', snapshot => {
+            let students = snapshot.val();
+            console.log(students);
+            let newState = [];
+            for (let student in students) {
+                newState.push({
+                    name: students[student].name, 
+                    github: students[student].github,
+                    linkedin: students[student].linkedIn,
+                });
+            } 
+            this.setState({
+                student: newState
+            });  
+        });
+        console.log("here is the UID", userId)
+    }
+
     render() {
+        console.log(this.state);
         return (
             <div>
                 <Grid>
