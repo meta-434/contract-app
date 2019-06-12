@@ -27,20 +27,18 @@ export default class CreateContract extends React.Component {
   handleClick = () => {
     this.sendToDatabase();
 
-    //this.resetForm();
+    this.resetForm();
   };
 
   sendToDatabase = () => {
     const userid = firebase.auth().currentUser.uid;
-    var data = {
-      contractId: userid + this.state.title,
-      title: this.state.title,
-      details: this.state.details,
-      bidCloseDate: this.state.bidCloseDate,
-      contractStartDate: this.state.contractStartDate,
-      contractEndDate: this.state.contractEndDate
-    };
-
+    var data = [
+      this.state.title,
+      this.state.details,
+      this.state.bidCloseDate,
+      this.state.contractStartDate,
+      this.state.contractEndDate
+    ];
     firebase
       .database()
       .ref("/users/company/")
@@ -48,15 +46,14 @@ export default class CreateContract extends React.Component {
       .then(snapshot => {
         snapshot.forEach(child => {
           if (child.val().uid === userid) {
-            firebase
-              .database()
-              .ref("/users/company/" + child.key + "/contracts/")
-              .push(data);
+            const obj = firebase.database().ref("/users/company/" + child.key + "/contracts/")
+            const companyName = child.val().name
+            data.unshift(companyName)
+            console.log(data)
+            obj.push(data);
           }
         });
       });
-
-    this.resetForm();
     console.log("Sent to data base");
   };
 
@@ -80,6 +77,7 @@ export default class CreateContract extends React.Component {
         <Grid item xs={12}>
           <TextField
             label="Title"
+            value={this.state.title}
             onChange={this.handleChange("title")}
             margin="normal"
             variant="outlined"
@@ -89,6 +87,7 @@ export default class CreateContract extends React.Component {
         <Grid item xs={12}>
           <TextField
             label="Details"
+            value={this.state.details}
             onChange={this.handleChange("details")}
             margin="normal"
             variant="outlined"
@@ -100,6 +99,7 @@ export default class CreateContract extends React.Component {
         <Grid item xs={3}>
           <TextField
             label="Bid Close Date"
+            value={this.state.bidCloseDate}
             onChange={this.handleChange("bidCloseDate")}
             margin="normal"
             variant="outlined"
@@ -108,6 +108,7 @@ export default class CreateContract extends React.Component {
         <Grid item xs={3}>
           <TextField
             label="Contract Start Date"
+            value={this.state.contractStartDate}
             onChange={this.handleChange("contractStartDate")}
             margin="normal"
             variant="outlined"
@@ -116,6 +117,7 @@ export default class CreateContract extends React.Component {
         <Grid item xs={3}>
           <TextField
             label="Contract End Date"
+            value={this.state.contractEndDate}
             onChange={this.handleChange("contractEndDate")}
             margin="normal"
             variant="outlined"
@@ -132,7 +134,7 @@ export default class CreateContract extends React.Component {
             </Box>
             submit
           </Button>
-          <h4>{this.state.alert}</h4>
+          <h2>{this.state.alert}</h2>
         </Grid>
       </Grid>
     );

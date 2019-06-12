@@ -15,7 +15,7 @@ const AdapterLink = React.forwardRef((props, ref) => (
 
 export default class CompanyProfile extends React.Component {
   state = {
-    info: ""
+    info: []
   };
 
   getData() {
@@ -26,29 +26,22 @@ export default class CompanyProfile extends React.Component {
       .once("value")
       .then(snapshot => {
         snapshot.forEach(child => {
-          info.push(child.val());
+          info.push(child.val().name);
         });
       });
-
-    return info;
-  }
-
-  getAndDisplayData() {
-    var info = [];
-    firebase
-      .database()
-      .ref("/users/company/")
-      .once("value")
-      .then(snapshot => {
-        snapshot.forEach(child => {
-          return <p>{child.val().title}</p>
-        });
-      });
-
+    this.setState({
+      info: info
+    });
     return info;
   }
 
   componentDidMount() {
+    this.setState({
+      info: this.getData()
+    });
+  }
+
+  updateState() {
     this.setState({
       info: this.getData()
     });
@@ -74,12 +67,12 @@ export default class CompanyProfile extends React.Component {
           <Route path="/CreateContract" component={CreateContract} />
           <h1>Current Contracts</h1>
 
-          {console.log(this.getData())}
-          <p>{this.getData()[0].name}</p>
+          {console.log(this.state.info)}
+          {(this.state.info.length !== 0) ? <p>{this.state.info}</p> : <p>Loading...</p>}
           
           <List alignItems="flex-start">
             <ListItem>
-              <ListItemText primary="Contract Title" />
+              <ListItemText primary={"Contract Title:"} />
             </ListItem>
             <ListItem>
               <ListItemText primary={"Contract Detail"} />
