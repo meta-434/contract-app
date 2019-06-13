@@ -146,6 +146,8 @@ handlePassword = () => {
     
     render(){
         return(
+          <div>
+          <div className='header'></div>
             <div className="login">
                 <div className='company-name'>Rev<b className='tech'>Tech</b></div>
                 <div className='greeting'>Welcome Back</div>
@@ -177,6 +179,7 @@ handlePassword = () => {
                             </Container>
                         </Container>
                         </div>          
+            </div>
             </div>
         )
     }

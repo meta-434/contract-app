@@ -1,4 +1,11 @@
-
+.signup{
+  font-weight: bold;
+  font-size: 20px;
+}
+.header{
+  background-color: #0077B5;
+  height: 10px;
+}
 .back{
   justify-content: center;
   align-items: center;
@@ -41,9 +48,8 @@ margin:75px;
 .newUser{
 margin: 40px;
 display: flex;
-align-items: center;
 flex-direction: column;
-justify-content: space-evenly;
+justify-content: center;
 }
 .userPlacement{
 display: flex;
