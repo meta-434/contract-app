@@ -1,13 +1,11 @@
-import React from 'react';
-import TextField from '@material-ui/core/TextField';
-import Grid from '@material-ui/core/Grid';
-import Button from '@material-ui/core/Button';
-import Icon from '@material-ui/core/Icon';
-import Box from '@material-ui/core/Box';
-import firebase from './firebase.js';
-
+import React from "react";
+import TextField from "@material-ui/core/TextField";
+import Grid from "@material-ui/core/Grid";
+import Button from "@material-ui/core/Button";
+import Icon from "@material-ui/core/Icon";
+import Box from "@material-ui/core/Box";
+import firebase from "./firebase.js";
 export default class CreateContract extends React.Component {
-
   constructor(props) {
     super(props);
     this.state = {
@@ -16,40 +14,49 @@ export default class CreateContract extends React.Component {
       bidCloseDate: "",
       contractStartDate: "",
       contractEndDate: "",
-    }
+      alert: ""
+    };
   }
-
 
   handleChange = name => event => {
     this.setState({
       [name]: event.target.value
     });
   };
-  
+
   handleClick = () => {
-    
     this.sendToDatabase();
 
-    //this.resetForm();
-  }
-
-
-  sendToDatabase = async() => {
-    //const date = (new Date()).toDateString();
-    var data = {
-      title: this.state.title,
-      details: this.state.details,
-      bidCloseDate: this.state.bidCloseDate,
-      contractStartDate: this.state.contractStartDate,
-      contractEndDate: this.state.contractEndDate,
-    }
-    const username = "Cm8Bc5MCK0Z1DITfDiHcbQU4wIk1" //firebase.auth().currentUser.uid; //delete test company
-    firebase.database().ref('users/company/'+username).push(data);
     this.resetForm();
-    console.log("Sent to data base")
-  }
+  };
 
-  
+  sendToDatabase = () => {
+    const userid = firebase.auth().currentUser.uid;
+    var data = [
+      this.state.title,
+      this.state.details,
+      this.state.bidCloseDate,
+      this.state.contractStartDate,
+      this.state.contractEndDate
+    ];
+    firebase
+      .database()
+      .ref("/users/company/")
+      .once("value")
+      .then(snapshot => {
+        snapshot.forEach(child => {
+          if (child.val().uid === userid) {
+            const obj = firebase.database().ref("/users/company/" + child.key + "/contracts/")
+            const companyName = child.val().name
+            data.unshift(companyName)
+            console.log(data)
+            obj.push(data);
+          }
+        });
+      });
+    console.log("Sent to data base");
+  };
+
   resetForm() {
     this.setState({
       title: "",
@@ -57,18 +64,21 @@ export default class CreateContract extends React.Component {
       bidCloseDate: "",
       contractStartDate: "",
       contractEndDate: "",
+      alert: "Done!"
     });
-
   }
 
   render() {
-    return(
-
+    return (
       <Grid container spacing={2}>
+        <Grid item xs={12}>
+          <h1>Contract Form</h1>
+        </Grid>
         <Grid item xs={12}>
           <TextField
             label="Title"
-            onChange={this.handleChange('title')}
+            value={this.state.title}
+            onChange={this.handleChange("title")}
             margin="normal"
             variant="outlined"
             fullWidth
@@ -77,7 +87,8 @@ export default class CreateContract extends React.Component {
         <Grid item xs={12}>
           <TextField
             label="Details"
-            onChange={this.handleChange('details')}
+            value={this.state.details}
+            onChange={this.handleChange("details")}
             margin="normal"
             variant="outlined"
             multiline
@@ -88,7 +99,8 @@ export default class CreateContract extends React.Component {
         <Grid item xs={3}>
           <TextField
             label="Bid Close Date"
-            onChange={this.handleChange('bidCloseDate')}
+            value={this.state.bidCloseDate}
+            onChange={this.handleChange("bidCloseDate")}
             margin="normal"
             variant="outlined"
           />
@@ -96,7 +108,8 @@ export default class CreateContract extends React.Component {
         <Grid item xs={3}>
           <TextField
             label="Contract Start Date"
-            onChange={this.handleChange('contractStartDate')}
+            value={this.state.contractStartDate}
+            onChange={this.handleChange("contractStartDate")}
             margin="normal"
             variant="outlined"
           />
@@ -104,22 +117,26 @@ export default class CreateContract extends React.Component {
         <Grid item xs={3}>
           <TextField
             label="Contract End Date"
-            onChange={this.handleChange('contractEndDate')}
+            value={this.state.contractEndDate}
+            onChange={this.handleChange("contractEndDate")}
             margin="normal"
             variant="outlined"
           />
         </Grid>
         <Grid item xs={12}>
-          <Button variant="contained" color="primary" onClick={this.handleClick}>
-            <Box ml={-1} mb={-1} mr={1}><Icon>save</Icon></Box>
+          <Button
+            variant="contained"
+            color="primary"
+            onClick={this.handleClick}
+          >
+            <Box ml={-1} mb={-1} mr={1}>
+              <Icon>save</Icon>
+            </Box>
             submit
           </Button>
+          <h2>{this.state.alert}</h2>
         </Grid>
-        {this.state.title}
-          
       </Grid>
-        
     );
   }
 }
-

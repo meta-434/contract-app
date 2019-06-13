@@ -1,7 +1,6 @@
 // Login
 import React from 'react';
-import 'antd/dist/antd.css';
-import './login.css';
+// import './login.css';
 import Textfield from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import {CloseIcon} from '@material-ui/icons/Close';
