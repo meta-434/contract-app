@@ -8,7 +8,7 @@ import ListItemText from "@material-ui/core/ListItemText";
 import List from "@material-ui/core/List";
 import Icon from "@material-ui/core/Icon";
 import firebase from "./firebase.js";
-
+import DisplayContracts from "./DisplayContracts.js"
 const AdapterLink = React.forwardRef((props, ref) => (
   <Link innerRef={ref} {...props} />
 ));
@@ -26,7 +26,7 @@ export default class CompanyProfile extends React.Component {
       .once("value")
       .then(snapshot => {
         snapshot.forEach(child => {
-          info.push(child.val().name);
+		  info.push(child.val().name);
         });
       });
     this.setState({
@@ -68,16 +68,15 @@ export default class CompanyProfile extends React.Component {
           <h1>Current Contracts</h1>
 
           {console.log(this.state.info)}
-          {(this.state.info.length !== 0) ? <p>{this.state.info}</p> : <p>Loading...</p>}
-          
-          <List alignItems="flex-start">
+          <DisplayContracts/>
+          {/* <List alignItems="flex-start">
             <ListItem>
               <ListItemText primary={"Contract Title:"} />
             </ListItem>
             <ListItem>
               <ListItemText primary={"Contract Detail"} />
             </ListItem>
-          </List>
+          </List> */}
         </Router>
       </div>
     );

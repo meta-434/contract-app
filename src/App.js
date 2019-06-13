@@ -9,7 +9,7 @@ import CompanyProfile from "./CompanyProfile.js";
 import Login from "./Login";
 import NewUser from "./NewUser";
 import { BrowserRouter as Router, Route } from "react-router-dom";
-import TestTable from './TestTable';
+import TestTable from './DisplayContracts';
 import CreateContract from './CreateContract';
 function App() {
   return (
@@ -18,7 +18,7 @@ function App() {
         <Route exact path="/" component={Login} />
         <Route exact path="/NewUser" component={NewUser} />
         <Route exact path="/CompanyProfile" component={CompanyProfile} />
-        <Route exact path="/Test" component={TestTable} />
+        {/* <Route exact path="/Test" component={TestTable} /> */}
         <Route exact path="/CreateContract" component={CreateContract} />
       </Router>
       {/* <Home /> */}
