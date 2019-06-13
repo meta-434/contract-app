@@ -2,7 +2,7 @@ import React from "react";
 import "./App.css";
 import CompanyProfile from "./CompanyProfile.js";
 import StudentProfile from "./StudentProfile";
-// import StudentBid from './StudentBid';
+import StudentBid from "./StudentBid.js";
 // import StudentContracts from './StudentContracts';
 import StudentCard from "./StudentCard.js";
 import Login from "./Login.js";
@@ -25,6 +25,7 @@ function App() {
         <Route exact path="/Contracts" component={TestTable} />
         <Route exact path="/CompanyProfile" component={CompanyProfile} />
         <Route exact path="/CreateContract" component={CreateContract} />
+        <Route exact path="/StudentBid" component={StudentBid} />
       </Router>
     </div>
   );

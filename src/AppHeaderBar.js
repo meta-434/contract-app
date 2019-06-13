@@ -23,7 +23,7 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-function DenseAppBar() {
+DenseAppBar = props => {
   const [anchorEl, setAnchorEl] = React.useState(null);
   //should be used for chip only
   function handleChipDelete() {
@@ -117,5 +117,5 @@ function DenseAppBar() {
       </Router>
     </div>
   );
-}
+};
 export default DenseAppBar;
