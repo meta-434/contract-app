@@ -12,11 +12,12 @@ import CreateContract from "./CreateContract";
 import AppHeaderBar from "./AppHeaderBar";
 import Home from "./Home.js";
 import TestTable from "./TestTable.js";
+import Control from "./Control.js"
 
 function App() {
   return (
     <div>
-      <Router>
+      {/* <Router>
         <Route exact path="/" component={Login} />
         <Route exact path="/NavBar" component={AppHeaderBar} />
         <Route exact path="/NewUser" component={NewUser} />
@@ -25,7 +26,8 @@ function App() {
         <Route exact path="/Contracts" component={TestTable} />
         <Route exact path="/CompanyProfile" component={CompanyProfile} />
         <Route exact path="/CreateContract" component={CreateContract} />
-      </Router>
+      </Router> */}
+      <Control />
     </div>
   );
 }
