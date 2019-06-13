@@ -1,6 +1,7 @@
 import React from 'react';
 import 'antd/dist/antd.css';
 import './login.css';
+import Container from '@material-ui/core/Container';
 import { BrowserRouter as Router, Route, Link } from 'react-router-dom'
 //import { Form, Input, Button, Select } from 'antd';
 import {makeStyles, TextField, Button, Paper, Card} from '@material-ui/core/';
@@ -206,6 +207,13 @@ render(){
         <div>{this.state.company_clicked ? this.companyOutput() : null}</div>
         </div>
         </Card>
+        <div className='back'>
+        <Container maxWidth="sm">
+            <Container item>
+                Already on RevTech? <Link to="/" style={{color:"#0077B5"}}>Sign in</Link>
+            </Container>
+        </Container>
+        </div>
         </div>
     )
 }
