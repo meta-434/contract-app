@@ -1,13 +1,35 @@
 // Login
 import React from 'react';
-import 'antd/dist/antd.css';
-import './login.css';
-import { Form, Icon, Input, Button, Alert, message } from 'antd';
+// import './login.css';
+import Textfield from '@material-ui/core/TextField';
+import Button from '@material-ui/core/Button';
+import {CloseIcon} from '@material-ui/icons/Close';
+//import { Form, Icon, Input, Button, Alert, message } from 'antd';
+import {Alert} from 'antd';
 import NewUser from "./NewUser.js";
+import Grid from '@material-ui/core/Grid';
+import { makeStyles } from '@material-ui/core/styles';
+import Container from '@material-ui/core/Container';
 //import Profile from './Profile.js';
 import firebase from "./firebase.js";
 import { BrowserRouter as Router, Route, Link, Redirect } from 'react-router-dom'
 
+const classes = makeStyles(theme => ({
+    '@global': {
+      body: {
+        backgroundColor: theme.palette.common.white,
+      },
+    },
+    paper: {
+      marginTop: theme.spacing(8),
+      display: 'flex',
+      flexDirection: 'column',
+      alignItems: 'center',
+    },
+    submit: {
+      margin: theme.spacing(3, 0, 2),
+    },
+  }));
 
 const setErrorMessage = (error) => {
     return (
@@ -15,10 +37,10 @@ const setErrorMessage = (error) => {
     )
 }
 
-const info = () => {
-    message.info('This is a normal message');
-    
-};
+const onClose = (event) => {
+  console.log("I was closed")
+}
+
 class LogIn extends React.Component{
 
     state = {
@@ -27,6 +49,7 @@ class LogIn extends React.Component{
         userData: [],
         loginMessage : '',
         loginError: false,
+        passwordExists: false,
         //logInClicked: false,
     }
 
@@ -54,6 +77,24 @@ class LogIn extends React.Component{
         })
     }
 
+  displayMessage =() =>{
+    console.log('gets here')
+    this.setState({
+        passwordExists: true,
+    })
+}
+handlePassword = () => {
+  var auth = firebase.auth();
+  var emailAddress = this.state.username;
+  auth.sendPasswordResetEmail(emailAddress).then(function() {
+    console.log('email sent');
+  }).then(this.displayMessage)
+  .catch(function(error) {
+    console.log('no email');
+  }).then(this.displayMessage)
+}
+  
+
     // if they enter info and login... 
     handleLogIn = () => {
         firebase.auth().signInWithEmailAndPassword(this.state.username, this.state.password)
@@ -76,9 +117,6 @@ class LogIn extends React.Component{
           }).then(this.errorMessage);
     }
 
-
-
-      
     // check if their login info is correct
     checkSignin = (currentUser) => {
           firebase.auth().onAuthStateChanged(user => {
@@ -104,39 +142,43 @@ class LogIn extends React.Component{
             }
           });
     }
-
     
     render(){
         return(
+          <div>
+          <div className='header'></div>
             <div className="login">
-                <h1>RevTech App</h1>
-                <Form  className="login-form">
-                        {this.state.loginError ? <Alert message="Invalid username or password, try again" type="error" /> : <div></div>}
-                        <Input
-                            prefix={<Icon type="user" style={{ color: 'rgba(0,0,0,.25)' }} />}
-                            placeholder="Username"
+                <div className='company-name'>Rev<b className='tech'>Tech</b></div>
+                <div className='greeting'>Welcome Back</div>
+                <div>Sign in to stay updated on new opportunities</div>
+                <div  className="login-form">
+                        <Textfield
+                            variant="outlined" margin="normal" required fullWidth 
+                            id="email" label="Username(email)" 
                             onChange={(e)=>this.changeUsername(e.target.value)}
                         />
 
-                        <Input
-                            prefix={<Icon type="lock" style={{ color: 'rgba(0,0,0,.25)' }} />}
-                            type="password"
-                            placeholder="Password"
+                        <Textfield
+                            variant="outlined" margin="normal" required fullWidth type="password"
+                            id="password" label="Password" 
                             onChange={(e)=>this.changePassword(e.target.value)}
                         />
-
-                        <Button type="primary" onClick={this.handleLogIn} className="login-form-button">
+                        <Button style={{backgroundColor:"#0077B5"}}type="submit" fullWidth variant="contained" color="primary"
+                        onClick={this.handleLogIn} className={classes.submit} >
                             Log in
-                            {/* <Link to='/Profile'>Log In</Link> */}
                         </Button>
-
-                        <div>Don't Have an Account? Create one now!</div>
-                        <Button type="secondary" >
-                            <Link to='/NewUser'>Register</Link>
-                        </Button>
-
-                </Form>
-               
+                        {this.state.loginError ? <Alert message="Invalid username or password, try again" type="error" /> : <div></div>}
+                        <Container maxWidth="sm">
+                            <Container item>
+                                <Link to="/" style={{color:"#0077B5"}} onClick={this.handlePassword}>Forgot Password?</Link>
+                                {this.state.passwordExists ? <Alert message="Check your email to reset password." type="info" closable onClose={onClose}/> : <div></div>}
+                            </Container>
+                            <Container item>
+                              Don't have an account? <Link to="/NewUser" style={{color:"#0077B5"}}>Join now</Link>
+                            </Container>
+                        </Container>
+                        </div>          
+            </div>
             </div>
         )
     }
@@ -144,3 +186,10 @@ class LogIn extends React.Component{
 }
 
 export default LogIn;
+
+/*
+<div>Don't Have an Account? Create one now!</div>
+                        <Button type="secondary" >
+                            <Link to='/NewUser'>Register</Link>
+                        </Button>
+*/
