@@ -1,14 +1,11 @@
 import React from "react";
-import { makeStyles } from "@material-ui/core/styles";
 import Button from "@material-ui/core/Button";
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 import CreateContract from "./CreateContract.js";
-import ListItem from "@material-ui/core/ListItem";
-import ListItemText from "@material-ui/core/ListItemText";
-import List from "@material-ui/core/List";
 import Icon from "@material-ui/core/Icon";
 import firebase from "./firebase.js";
 import DisplayContracts from "./DisplayContracts.js"
+import TestTable from './TestTable.js'
 const AdapterLink = React.forwardRef((props, ref) => (
   <Link innerRef={ref} {...props} />
 ));
@@ -67,8 +64,9 @@ export default class CompanyProfile extends React.Component {
           <Route path="/CreateContract" component={CreateContract} />
           <h1>Current Contracts</h1>
 
-		  <DisplayContracts/>	
+		  	
         </Router>
+        <TestTable/>
       </div>
     );
   }

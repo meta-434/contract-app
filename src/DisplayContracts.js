@@ -2,25 +2,14 @@ import React, { Component } from "react";
 //import firebase connection info
 import firebase from "./firebase";
 //material-ui
-
-import { makeStyles } from "@material-ui/core/styles";
 import Table from "@material-ui/core/Table";
 import TableBody from "@material-ui/core/TableBody";
 import TableCell from "@material-ui/core/TableCell";
 import TableHead from "@material-ui/core/TableHead";
 import TableRow from "@material-ui/core/TableRow";
 import Paper from "@material-ui/core/Paper";
+import CircularProgress from '@material-ui/core/CircularProgress';
 
-const useStyles = makeStyles(theme => ({
-  root: {
-    width: "100%",
-    marginTop: theme.spacing(3),
-    overflowX: "auto"
-  },
-  table: {
-    minWidth: 650
-  }
-}));
 
 class SimpleTable extends Component {
   constructor(props) {
@@ -55,10 +44,13 @@ class SimpleTable extends Component {
     console.log(err);
   }
 
+  getCompanyName() {
+    
+  }
   parseData() {
     let c = this.state.dbValue;
     let contractObjects = [];
-    let result = [];
+    
 
     console.log("c= ", c);
     Object.keys(c).map(item => {
@@ -74,16 +66,19 @@ class SimpleTable extends Component {
       if (contractObjects[i] !== "") {
         Object.keys(contractObjects[i]).map(k => {
           console.log("gets to push");
-          this.state.rows.push(
-            this.createData(
-              contractObjects[i][k][0],
-              contractObjects[i][k][1],
-              contractObjects[i][k][2],
-              contractObjects[i][k][3],
-              contractObjects[i][k][4],
-              contractObjects[i][k][5]
-            )
-          );
+          
+          if(contractObjects[i][k][0] === "HackCville") {
+            this.state.rows.push(
+              this.createData(
+                contractObjects[i][k][0],
+                contractObjects[i][k][1],
+                contractObjects[i][k][2],
+                contractObjects[i][k][3],
+                contractObjects[i][k][4],
+                contractObjects[i][k][5]
+              )
+            );
+          }
         });
       }
     }
@@ -132,7 +127,7 @@ class SimpleTable extends Component {
     return (
       <div>
         {this.state.dbValue === undefined && this.state.rows !== [] ? (
-          <p>EMPTY</p>
+          <h2>Loading...<CircularProgress/></h2>
         ) : (
           this.makeTable()
         )}
