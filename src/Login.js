@@ -151,7 +151,7 @@ handlePassword = () => {
             <div className="login">
                 <div className='company-name'>Rev<b className='tech'>Tech</b></div>
                 <div className='greeting'>Welcome Back</div>
-                <div>Sign in to stay updated on new oppurtunities</div>
+                <div>Sign in to stay updated on new opportunities</div>
                 <div  className="login-form">
                         <Textfield
                             variant="outlined" margin="normal" required fullWidth 
