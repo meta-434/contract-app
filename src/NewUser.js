@@ -174,15 +174,16 @@ export default class NewAccount extends React.Component {
 render(){
     console.log()
     return(
+        <div>
+        <div className='header'></div>
         <div className="new-user-page">
         <div className='company-name2'>Rev<b className='tech'>Tech</b></div>
         <Card style={{width: 400}}>
         <div className="newUser">
-        <h3>Please Enter Your Information:</h3>
+        <div className='signup'>Sign Up</div>
         <div className="userPlacement">
-            Choose an Account Type
-            <br></br>
-            <div>
+        <h4>What kind of account do you want to create?</h4>
+        <div>
             <Button 
                 component="button"
                 type="submit"
@@ -213,6 +214,7 @@ render(){
                 Already on RevTech? <Link to="/" style={{color:"#0077B5"}}>Sign in</Link>
             </Container>
         </Container>
+        </div>
         </div>
         </div>
     )
