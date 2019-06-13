@@ -7,8 +7,9 @@ import CardContent from '@material-ui/core/CardContent';
 import CardMedia from '@material-ui/core/CardMedia';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
+import firebase from './firebase.js';
 
-const useStyles = makeStyles({
+const classes = makeStyles({
     card: {
       maxWidth: 300,
       textAlign: 'center',
@@ -22,9 +23,41 @@ const useStyles = makeStyles({
     },
 });
 
-export default function StudentCard() {
-    const classes = useStyles();
-  
+export default class StudentCard extends React.Component{
+
+state = {
+  userObject: {
+      display: false // decides whether or not we call displayLog or not
+  },
+}
+componentDidMount=()=>{
+// if the login info is correct, retrieve user data and pass it to Profile page
+
+  const currUid = this.props.location.state.userUID; // pass in the logged in user's uid
+  console.log("inside componentDidMount in Profile")
+  console.log(currUid);
+
+  const userRef = firebase.database().ref("users/student"); // access all users
+  userRef.on('value', (snapshot) => {
+  let users = snapshot.val();
+  for(let user in users){
+      if( currUid == users[user].uid){    // check for a user with a matching uid
+          const userObject= {             // if found, create a new user object that will be used to display data
+              name: users[user].name,
+              github: users[user].github,
+              linkedIn: users[user].linkedIn,
+              uid : users[user].uid,
+              email_address : users[user].email_address,
+          }
+          console.log(userObject.email_address);
+          this.setState({userObject: userObject, display: true}) // mark display as true
+          break;
+
+      }
+  }
+})
+}
+  render(){
     return (
       <Card className={classes.card}>
         <CardActionArea>
@@ -35,15 +68,16 @@ export default function StudentCard() {
           />
           <CardContent>
             <Typography gutterBottom variant="h5" component="h2">
-              Nicolas Cage
+              {this.state.userObject.name}
             </Typography>
             <Typography variant="body2" color="textSecondary" component="p">
               Computer Science Major at UVA <br/>  
-              Github: https://github.com/mawilliams098 <br/>
-              LinkedIn: https://www.linkedin.com/feed/
+              Github: {this.state.userObject.github} <br/>
+              LinkedIn: {this.state.userObject.linkedIn}
             </Typography>
           </CardContent>
         </CardActionArea>
       </Card>
     );
   }
+}
