@@ -6,6 +6,7 @@ import { BrowserRouter as Router, Route, Link } from 'react-router-dom'
 //import { Form, Input, Button, Select } from 'antd';
 import {makeStyles, TextField, Button, Paper, Card} from '@material-ui/core/';
 import firebase from "./firebase.js";
+import AppHeaderBar from "./AppHeaderBar";
 
 
 const useStyles = makeStyles(theme => ({
@@ -25,15 +26,15 @@ function handleUser(type){
     return type;
 }
 function handleClose(event, reason) {
-    if (reason === 'clickaway') {
-      return;
-    }
+  if (reason === "clickaway") {
+    return;
+  }
 }
 
 
 export default class NewAccount extends React.Component {
-    constructor(props){
-        super(props);
+  constructor(props) {
+    super(props);
     this.state = {
         name: "",
         username: "",
@@ -87,6 +88,43 @@ export default class NewAccount extends React.Component {
             // ...
           });
     };
+  }
+  createAccount = () => {
+    firebase
+      .auth()
+      .createUserWithEmailAndPassword(this.state.username, this.state.password)
+      .then(data => {
+        const currentUser = firebase.auth().currentUser;
+        currentUser.updateProfile({
+          displayName: this.state.type
+        });
+        console.log(currentUser);
+        const userRef = firebase.database().ref("/users/" + this.state.type);
+        if (this.state.type == "student") {
+          const new_student = {
+            uid: data.user.uid,
+            name: this.state.name,
+            contracts_applied: [],
+            linkedIn: this.state.linkedIn,
+            github: this.state.github
+          };
+          userRef.push(new_student);
+        } else {
+          const new_company = {
+            uid: data.user.uid,
+            name: this.state.name,
+            contracts_posted: []
+          };
+          userRef.push(new_company);
+        }
+      })
+      .catch(function(error) {
+        // Handle Errors here.
+        var errorCode = error.code;
+        var errorMessage = error.message;
+        // ...
+      });
+  };
 
     
     studentOutput = () => {
@@ -221,34 +259,34 @@ render(){
 }
 changeName = (input) => {
     this.setState({
-        name: input
-    })
-}
-changeUsername = (input) => {
+      name: input
+    });
+  };
+  changeUsername = input => {
     this.setState({
-        username: input
-    })
-}
-changePassword = (input) => {
+      username: input
+    });
+  };
+  changePassword = input => {
     this.setState({
-        password: input
-    })
-}
-changeGithub = (input) => {
+      password: input
+    });
+  };
+  changeGithub = input => {
     this.setState({
-        github: input
-    })
-}
-changeLinkedIn = (input) => {
+      github: input
+    });
+  };
+  changeLinkedIn = input => {
     this.setState({
-        linkedIn: input
-    })
-}
-handleStudentType = () => {
+      linkedIn: input
+    });
+  };
+  handleStudentType = () => {
     this.setState({
-        type : handleUser("student"), 
-        student_clicked : true,
-        company_clicked : false,
-    })
-}
+      type: handleUser("student"),
+      student_clicked: true,
+      company_clicked: false
+    });
+  };
 }

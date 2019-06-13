@@ -10,6 +10,8 @@ import NewUser from './NewUser.js'
 import { BrowserRouter as Router, Route, Link } from 'react-router-dom'
 import Home from "./Home.js"
 
+import { BrowserRouter as Router, Route, Path, Link } from "react-router-dom";
+
 function App() {
   return (
     <div>

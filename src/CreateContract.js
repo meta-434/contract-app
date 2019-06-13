@@ -5,6 +5,7 @@ import Button from '@material-ui/core/Button';
 import Icon from '@material-ui/core/Icon';
 import Box from '@material-ui/core/Box';
 import firebase from './firebase.js';
+
 export default class CreateContract extends React.Component {
 
   constructor(props) {
