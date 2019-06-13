@@ -67,16 +67,7 @@ export default class CompanyProfile extends React.Component {
           <Route path="/CreateContract" component={CreateContract} />
           <h1>Current Contracts</h1>
 
-          {console.log(this.state.info)}
-          <DisplayContracts/>
-          {/* <List alignItems="flex-start">
-            <ListItem>
-              <ListItemText primary={"Contract Title:"} />
-            </ListItem>
-            <ListItem>
-              <ListItemText primary={"Contract Detail"} />
-            </ListItem>
-          </List> */}
+		  <DisplayContracts/>	
         </Router>
       </div>
     );

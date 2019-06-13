@@ -122,10 +122,6 @@ class SimpleTable extends Component {
     );
   }
 
-  makeRows() {
-    
-  }
-
   render() {
     if (this.state.dbValue == undefined) {
       this.cnx();
