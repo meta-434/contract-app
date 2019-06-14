@@ -33,7 +33,7 @@ class SimpleTable extends Component {
     });
   };
 
-  getCompanyName() {
+  async getCompanyName() {
     
     firebase
       .database()
@@ -42,7 +42,7 @@ class SimpleTable extends Component {
       .then(snapshot => {
         snapshot.forEach(child => {
           if (child.val().uid === firebase.auth().currentUser.uid) {
-            window.compName = child.val().name
+            return child.val().name
           }
         });
       });
@@ -72,7 +72,7 @@ class SimpleTable extends Component {
         Object.keys(contractObjects[i]).map(k => {
           //console.log("gets to push");
           
-          if(contractObjects[i][k][0] === "HackCville") {
+          if(contractObjects[i][k][0] === "Chrome") {
             this.state.rows.push(
               this.createData(
                 contractObjects[i][k][0],
