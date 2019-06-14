@@ -92,7 +92,7 @@ class SimpleTable extends Component {
             </TableHead>
             <TableBody>
               {this.state.rows.map(row => (
-                <TableRow key={row.name}>
+                <TableRow key={row.name}}>
                   <TableCell component="th" scope="row">
                     {row.issuer}
                   </TableCell>

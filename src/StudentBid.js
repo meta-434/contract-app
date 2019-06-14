@@ -67,13 +67,13 @@ function StudentBid(props) {
         return (
             <div>
                 {/* Somehow render details of contract selected from StudentContracts.js */}
-                <Paper className={classes.root}>
+                {/* <Paper className={classes.root}>
                     <Typography variant="h3" component="h3">
                         Contract Details
                     </Typography>
-                </Paper>
+                </Paper> */}
                
-                <p style={{paddingLeft:20, paddingBottom:20,}}> ~query contract details from selected contract here~ </p>
+                {/* <p style={{paddingLeft:20, paddingBottom:20,}}> ~query contract details from selected contract here~ </p> */}
 
                 <Paper className={classes.root}>
                     <Typography variant="h3" component="h3">

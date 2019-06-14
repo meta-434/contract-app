@@ -12,6 +12,7 @@ import CreateContract from "./CreateContract";
 import AppHeaderBar from "./AppHeaderBar";
 import Home from "./Home.js";
 import TestTable from "./TestTable.js";
+import StudentBid from "./StudentBid"
 
 function App() {
   return (
@@ -25,6 +26,7 @@ function App() {
         <Route exact path="/Contracts" component={TestTable} />
         <Route exact path="/CompanyProfile" component={CompanyProfile} />
         <Route exact path="/CreateContract" component={CreateContract} />
+        <Route exact path="/Bid" component={StudentBid} />
       </Router>
     </div>
   );
