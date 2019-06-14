@@ -10,6 +10,8 @@ import TableRow from "@material-ui/core/TableRow";
 import Paper from "@material-ui/core/Paper";
 import CircularProgress from '@material-ui/core/CircularProgress';
 
+// navbar
+import AppHeaderBar from "./AppHeaderBar";
 
 class SimpleTable extends Component {
   constructor(props) {
@@ -18,11 +20,6 @@ class SimpleTable extends Component {
       rows: []
     };
   }
-
-  // cnx() {
-  //   const db = firebase.database().ref("users");
-  //   db.on("value", this.gotData, this.errData);
-  // }
 
   createData(issuer, title, details, bid_close, con_start, con_end) {
     return { issuer, title, details, bid_close, con_start, con_end };
@@ -50,7 +47,6 @@ class SimpleTable extends Component {
   parseData() {
     let c = this.state.dbValue;
     let contractObjects = [];
-    
 
     console.log("c= ", c);
     Object.keys(c).map(item => {
@@ -86,34 +82,39 @@ class SimpleTable extends Component {
 
   makeTable() {
     return (
-      <Paper>
-        <Table>
-          <TableHead>
-            <TableRow>
-              <TableCell>Contract&nbsp;Issuer</TableCell>
-              <TableCell align="right">Contract&nbsp;Name</TableCell>
-              <TableCell align="right">Details</TableCell>
-              <TableCell align="right">Bid&nbsp;Close&nbsp;Date</TableCell>
-              <TableCell align="right">Contract&nbsp;Start&nbsp;Date</TableCell>
-              <TableCell align="right">Contract&nbsp;End&nbsp;Date</TableCell>
-            </TableRow>
-          </TableHead>
-          <TableBody>
-            {this.state.rows.map(row => (
-              <TableRow key={row.name}>
-                <TableCell component="th" scope="row">
-                  {row.issuer}
+      <div>
+        <AppHeaderBar />
+        <Paper>
+          <Table>
+            <TableHead>
+              <TableRow>
+                <TableCell>Contract&nbsp;Issuer</TableCell>
+                <TableCell align="right">Contract&nbsp;Name</TableCell>
+                <TableCell align="right">Details</TableCell>
+                <TableCell align="right">Bid&nbsp;Close&nbsp;Date</TableCell>
+                <TableCell align="right">
+                  Contract&nbsp;Start&nbsp;Date
                 </TableCell>
-                <TableCell align="right">{row.title}</TableCell>
-                <TableCell align="right">{row.details}</TableCell>
-                <TableCell align="right">{row.bid_close}</TableCell>
-                <TableCell align="right">{row.con_start}</TableCell>
-                <TableCell align="right">{row.con_end}</TableCell>
+                <TableCell align="right">Contract&nbsp;End&nbsp;Date</TableCell>
               </TableRow>
-            ))}
-          </TableBody>
-        </Table>
-      </Paper>
+            </TableHead>
+            <TableBody>
+              {this.state.rows.map(row => (
+                <TableRow key={row.name}>
+                  <TableCell component="th" scope="row">
+                    {row.issuer}
+                  </TableCell>
+                  <TableCell align="right">{row.title}</TableCell>
+                  <TableCell align="right">{row.details}</TableCell>
+                  <TableCell align="right">{row.bid_close}</TableCell>
+                  <TableCell align="right">{row.con_start}</TableCell>
+                  <TableCell align="right">{row.con_end}</TableCell>
+                </TableRow>
+              ))}
+            </TableBody>
+          </Table>
+        </Paper>
+      </div>
     );
   }
 

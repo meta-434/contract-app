@@ -6,7 +6,7 @@ import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 //import { Form, Input, Button, Select } from 'antd';
 import { makeStyles, TextField, Button, Paper, Card } from "@material-ui/core/";
 import firebase from "./firebase.js";
-import AppHeaderBar from "./AppHeaderBar";
+// import AppHeaderBar from "./AppHeaderBar";
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -65,43 +65,7 @@ export default class NewAccount extends React.Component {
           const new_student = {
             uid: data.user.uid,
             name: this.state.name,
-            contracts_applied: [],
-            linkedIn: this.state.linkedIn,
-            github: this.state.github
-          };
-          userRef.push(new_student);
-        } else {
-          const new_company = {
-            uid: data.user.uid,
-            name: this.state.name,
-            contracts_posted: []
-          };
-          userRef.push(new_company);
-        }
-      })
-      .catch(function(error) {
-        // Handle Errors here.
-        var errorCode = error.code;
-        var errorMessage = error.message;
-        // ...
-      });
-  };
-
-  createAccount = () => {
-    firebase
-      .auth()
-      .createUserWithEmailAndPassword(this.state.username, this.state.password)
-      .then(data => {
-        const currentUser = firebase.auth().currentUser;
-        currentUser.updateProfile({
-          displayName: this.state.type
-        });
-        console.log(currentUser);
-        const userRef = firebase.database().ref("/users/" + this.state.type);
-        if (this.state.type == "student") {
-          const new_student = {
-            uid: data.user.uid,
-            name: this.state.name,
+            email_address: this.state.username,
             contracts_applied: [],
             linkedIn: this.state.linkedIn,
             github: this.state.github
