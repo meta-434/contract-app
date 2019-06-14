@@ -4,7 +4,7 @@ import CompanyProfile from "./CompanyProfile.js";
 import StudentProfile from "./StudentProfile";
 // import StudentBid from './StudentBid';
 // import StudentContracts from './StudentContracts';
-import StudentCard from "./StudentCard.js";
+// import StudentCard from "./StudentCard.js";
 import Login from "./Login.js";
 import NewUser from "./NewUser.js";
 import { BrowserRouter as Router, Route, Path, Link } from "react-router-dom";
