@@ -1,6 +1,8 @@
 import React, { Component } from 'react'
 import { makeStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
+import Container from '@material-ui/core/Container';
+
 import TextField from '@material-ui/core/TextField';
 import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
@@ -74,12 +76,13 @@ function StudentBid(props) {
                 </Paper> */}
                
                 {/* <p style={{paddingLeft:20, paddingBottom:20,}}> ~query contract details from selected contract here~ </p> */}
-
+                <Container maxWidth="md5">
                 <Paper className={classes.root}>
                     <Typography variant="h3" component="h3">
                         Submit Your Bid
                     </Typography>
                 </Paper>
+                </Container>
 
                 {/* Submit a bid for that contract to the company (once approved?) */}
                 <form className={classes.container} noValidate autoComplete="off">
