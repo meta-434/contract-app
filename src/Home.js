@@ -36,20 +36,33 @@ class Home extends Component {
     this.setState({ input: event.target.value });
   };
 
-  getSubmissions = () => {
+  // getSubmissions = () => {
+  //   const respRef = firebase.database().ref("challenges/1/");
+  //   respRef.once("value", snapshot => {
+  //     this.setState({ responses: snapshot.toJSON() });
+  //     console.log("state: ", this.state.responses)
+  //   });
+  // };
+
+  componentDidMount = () => {
     const respRef = firebase.database().ref("challenges/1/");
     respRef.once("value", snapshot => {
       this.setState({ responses: snapshot.toJSON() });
+      console.log("state: ", this.state.responses);
     });
-    console.log(this.state.responses);
   };
 
   displaySubmissions = () => {
-    let reference = this.state.responses;
+    console.log(this.state.responses.responses);
+    let e = this.state.responses.responses;
+    // FIX THIS -> DOESN'T FETCH CORRECT DATA
+    // e.map(i => {
+    //   console.log(i);
+    // });
 
-    return Object.keys(reference.responses).map(item => {
-     return (<Typography>{item}</Typography>);
-    });
+    for (let i = 0; i < Object.keys(e).length; i++) {
+      console.log(e[i]);
+    }
   };
 
   render() {
@@ -76,7 +89,11 @@ class Home extends Component {
                 aria-controls="panel1a-content"
                 id="panel1a-header"
               >
-                <Typography>Sample Task 1</Typography>
+                <Typography>
+                  {this.state.responses !== null
+                    ? this.state.responses.title
+                    : null}
+                </Typography>
               </ExpansionPanelSummary>
               <ExpansionPanelDetails>
                 <Grid
@@ -87,8 +104,9 @@ class Home extends Component {
                 >
                   <Grid item xs={12}>
                     <Typography>
-                      This would be a sample task that is posted by an
-                      instuctor.
+                      {this.state.responses !== null
+                        ? this.state.responses.info
+                        : null}
                     </Typography>
                   </Grid>
                   <Grid item xs={12}>
