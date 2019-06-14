@@ -13,6 +13,7 @@ import AppHeaderBar from "./AppHeaderBar";
 import Home from "./Home.js";
 import DisplayContracts from "./DisplayContracts.js";
 import StudentBid from "./StudentBid";
+import TestTable from "./TestTable.js";
 
 function App() {
   return (
@@ -23,7 +24,7 @@ function App() {
         <Route exact path="/NewUser" component={NewUser} />
         <Route exact path="/Home" component={Home} />
         <Route exact path="/StudentProfile" component={StudentProfile} />
-        <Route exact path="/Contracts" component={DisplayContracts} />
+        <Route exact path="/Contracts" component={TestTable} />
         <Route exact path="/CompanyProfile" component={CompanyProfile} />
         <Route exact path="/CreateContract" component={CreateContract} />
         <Route exact path="/Bid" component={StudentBid} />
