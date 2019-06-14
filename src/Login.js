@@ -51,6 +51,7 @@ class LogIn extends React.Component{
         loginError: false,
         passwordExists: false,
         //logInClicked: false,
+        uid: undefined
     }
 
     // changes the stored username in state based on user input

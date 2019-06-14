@@ -11,6 +11,7 @@ import Tooltip from "@material-ui/core/Tooltip";
 import Menu from "@material-ui/core/Menu";
 import MenuItem from "@material-ui/core/MenuItem";
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
+
 const useStyles = makeStyles(theme => ({
   root: {
     flexGrow: 1
@@ -23,7 +24,7 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-DenseAppBar = props => {
+function DenseAppBar(props) {
   const [anchorEl, setAnchorEl] = React.useState(null);
   //should be used for chip only
   function handleChipDelete() {
@@ -36,11 +37,13 @@ DenseAppBar = props => {
   //soley for opening menu
   function handleClick(event) {
     console.log("click triggered");
+    console.log(UID);
     setAnchorEl(event.currentTarget);
   }
   //for click away
   function handleClose() {
     console.log("close triggered");
+    console.log("props.args ", props);
     window.history.go();
     setAnchorEl(null);
   }
@@ -48,6 +51,8 @@ DenseAppBar = props => {
   function handleClickProfile() {
     return;
   }
+
+  const UID = props.args;
 
   const classes = useStyles();
   return (
@@ -79,6 +84,9 @@ DenseAppBar = props => {
                 <Link
                   to="/StudentProfile"
                   style={{ textDecoration: "none", color: "black" }}
+                  state={{
+                    args: UID
+                  }}
                 >
                   <MenuItem>Profile</MenuItem>
                 </Link>
@@ -117,5 +125,5 @@ DenseAppBar = props => {
       </Router>
     </div>
   );
-};
+}
 export default DenseAppBar;

@@ -7,12 +7,12 @@ import List from "@material-ui/core/List";
 import ListItem from "@material-ui/core/ListItem";
 import ListItemText from "@material-ui/core/ListItemText";
 import Divider from "@material-ui/core/Divider";
-
+import firebase from "./firebase.js";
 import Grid from "@material-ui/core/Grid";
 import AppHeaderBar from "./AppHeaderBar";
 
 // material UI setup
-const useStyles = makeStyles(theme => ({
+const classes = makeStyles(theme => ({
   button: {
     margin: theme.spacing(1)
     // justifyContent: 'flex-end',
@@ -28,29 +28,40 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-export default class StudentProfile extends React.Component {
+class StudentProfile extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       userObject: {
         display: false // decides whether or not we call displayLog or not
-      }
+      },
+      test: "test value"
     };
   }
 
   componentDidMount = () => {
     // if the login info is correct, retrieve user data and pass it to Profile page
-
-    const currUid = this.props.location.state.userUID; // pass in the logged in user's uid
+    // const currUid = this.props.location.state.userUID; pass in the logged in user's uid
     console.log("inside componentDidMount in Profile");
-    console.log(currUid);
-    this.setState({ uid : currUid });
+    // let currUid = this.props.location.state.userUID);
+    firebase.auth().onAuthStateChanged(function(user) {
+      if (user) {
+        console.log("Signed in, uid: ", user.uid);
+        const currUid = user.uid;
+        console.log("state test: ", this.state.test);
+      } else {
+        console.log("not signed in...");
+      }
+    });
+
     const userRef = firebase.database().ref("users/student"); // access all users
     userRef.on("value", snapshot => {
       let users = snapshot.val();
       for (let user in users) {
-        if (currUid == users[user].uid) {
-          // check for a user with a matching uid
+        console.log("matcher uid: ", users[user].uid);
+        // console.log("matched uid: ", currUid);
+        if (this.currUid === users[user].uid) {
+          console.log("match!");
           const userObject = {
             // if found, create a new user object that will be used to display data
             name: users[user].name,
@@ -70,7 +81,7 @@ export default class StudentProfile extends React.Component {
   render() {
     return (
       <div>
-        <AppHeaderBar props={}/>
+        <AppHeaderBar args={this.props.location.state} />
         <Grid>
           <Grid item xs={12} justify="flex-end">
             {/* Button only Available if logged in */}
@@ -79,12 +90,38 @@ export default class StudentProfile extends React.Component {
             </Button>
           </Grid>
 
-        {/* Contracts list only Available if user is logged in */}
-        {/* Ideally this will be material-UI talbe */}
-        <h1 style={{ textAlign: "center" }}>Current Contracts</h1>
-      </Grid>
-    </div>
-  );
+          {/* Dummy Data for now ...  */}
+          <h1 style={{ textAlign: "center" }}>{this.state.userObject.name}</h1>
+
+          {/* Material UI list divider */}
+          <List component="nav" className={classes.root}>
+            <ListItem button>
+              <ListItemText>
+                {" "}
+                Email: {this.state.userObject.email_address}
+              </ListItemText>
+            </ListItem>
+            <Divider />
+            <ListItem button>
+              <ListItemText>
+                {" "}
+                GitHub: {this.state.userObject.github}
+              </ListItemText>
+            </ListItem>
+            <Divider light />
+            <ListItem button>
+              <ListItemText>
+                {" "}
+                LinkedIn: {this.state.userObject.linkedIn}
+              </ListItemText>
+            </ListItem>
+          </List>
+
+          <h1 style={{ textAlign: "center" }}>Current Contracts</h1>
+        </Grid>
+      </div>
+    );
+  }
 }
 
 export default StudentProfile;
