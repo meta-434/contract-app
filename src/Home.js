@@ -8,25 +8,48 @@ import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 import TextField from "@material-ui/core/TextField";
 import Reply from "@material-ui/icons/Reply";
 import Tooltip from "@material-ui/core/Tooltip";
-
+import firebase from "./firebase.js";
 class Home extends Component {
   constructor(props) {
     super(props);
 
     this.state = {
       input: null,
-      submission: null
+      submission: null,
+      responses: null
     };
   }
 
   // send to DB
-  handleSubmissionClick = () => {
+  handleSubmissionClick = event => {
     console.log("submission is: ", this.state.input);
+    const ref = firebase.database().ref("challenges/1/responses");
+    const submission = {
+      entry: this.state.input,
+      timestamp: new Date().toLocaleString()
+    };
+    ref.push(submission);
+    this.getSubmissions();
   };
 
   handleSubmissionInput = event => {
-    console.log(event.target.value);
     this.setState({ input: event.target.value });
+  };
+
+  getSubmissions = () => {
+    const respRef = firebase.database().ref("challenges/1/");
+    respRef.once("value", snapshot => {
+      this.setState({ responses: snapshot.toJSON() });
+    });
+    console.log(this.state.responses);
+  };
+
+  displaySubmissions = () => {
+    let reference = this.state.responses;
+
+    return Object.keys(reference.responses).map(item => {
+     return (<Typography>{item}</Typography>);
+    });
   };
 
   render() {
@@ -40,7 +63,7 @@ class Home extends Component {
               display: "flex",
               justifyContent: "center",
               alignItems: "center",
-              height: "10vh",
+              height: "10vh"
               //specify font maybe?
             }}
           >
@@ -84,16 +107,23 @@ class Home extends Component {
                     </label>
                   </Grid>
                   <Grid item xs={3}>
-                  <Tooltip title="Submit Github Repo">
-                    <Button
-                      variant="contained"
-                      color="default"
-                      onClick={this.handleSubmissionClick}
-                    >
-                      Reply
-                      <Reply />
-                    </Button>
+                    <Tooltip title="Submit Github Repo">
+                      <Button
+                        variant="contained"
+                        color="default"
+                        onClick={this.handleSubmissionClick}
+                      >
+                        Reply
+                        <Reply />
+                      </Button>
                     </Tooltip>
+                  </Grid>
+                  <Grid item xs={12}>
+                    <Typography>
+                      {this.state.responses !== null
+                        ? this.displaySubmissions()
+                        : null}
+                    </Typography>
                   </Grid>
                 </Grid>
               </ExpansionPanelDetails>
