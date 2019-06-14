@@ -8,7 +8,7 @@ import TableCell from "@material-ui/core/TableCell";
 import TableHead from "@material-ui/core/TableHead";
 import TableRow from "@material-ui/core/TableRow";
 import Paper from "@material-ui/core/Paper";
-import CircularProgress from '@material-ui/core/CircularProgress';
+import CircularProgress from "@material-ui/core/CircularProgress";
 
 // navbar
 import AppHeaderBar from "./AppHeaderBar";
@@ -41,9 +41,7 @@ class SimpleTable extends Component {
     console.log(err);
   }
 
-  getCompanyName() {
-    
-  }
+  getCompanyName() {}
   parseData() {
     let c = this.state.dbValue;
     let contractObjects = [];
@@ -62,19 +60,17 @@ class SimpleTable extends Component {
       if (contractObjects[i] !== "") {
         Object.keys(contractObjects[i]).map(k => {
           console.log("gets to push");
-          
-          if(contractObjects[i][k][0] === "HackCville") {
-            this.state.rows.push(
-              this.createData(
-                contractObjects[i][k][0],
-                contractObjects[i][k][1],
-                contractObjects[i][k][2],
-                contractObjects[i][k][3],
-                contractObjects[i][k][4],
-                contractObjects[i][k][5]
-              )
-            );
-          }
+
+          this.state.rows.push(
+            this.createData(
+              contractObjects[i][k][0],
+              contractObjects[i][k][1],
+              contractObjects[i][k][2],
+              contractObjects[i][k][3],
+              contractObjects[i][k][4],
+              contractObjects[i][k][5]
+            )
+          );
         });
       }
     }
@@ -128,7 +124,10 @@ class SimpleTable extends Component {
     return (
       <div>
         {this.state.dbValue === undefined && this.state.rows !== [] ? (
-          <h2>Loading...<CircularProgress/></h2>
+          <h2>
+            Loading...
+            <CircularProgress />
+          </h2>
         ) : (
           this.makeTable()
         )}
