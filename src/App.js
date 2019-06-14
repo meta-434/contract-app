@@ -12,7 +12,7 @@ import CreateContract from "./CreateContract";
 import AppHeaderBar from "./AppHeaderBar";
 import Home from "./Home.js";
 import DisplayContracts from "./DisplayContracts.js";
-import StudentBid from "./StudentBid"
+import StudentBid from "./StudentBid";
 
 function App() {
   return (
@@ -27,6 +27,7 @@ function App() {
         <Route exact path="/CompanyProfile" component={CompanyProfile} />
         <Route exact path="/CreateContract" component={CreateContract} />
         <Route exact path="/Bid" component={StudentBid} />
+        <Route exact path="/logout" component={Login} />
       </Router>
     </div>
   );

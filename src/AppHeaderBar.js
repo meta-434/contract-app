@@ -120,7 +120,7 @@ function DenseAppBar() {
             <Typography variant="h6" color="inherit" className={classes.title}>
               RevTek Internships
             </Typography>
-            <Tooltip title="Profile Information">
+            {/* <Tooltip title="Profile Information">
               <Chip
                 size="small"
                 avatar={<Avatar>AH</Avatar>}
@@ -131,7 +131,7 @@ function DenseAppBar() {
                 color="primary"
                 onDelete={handleChipDelete} // sign out
               />
-            </Tooltip>
+            </Tooltip> */}
           </Toolbar>
         </AppBar>
       </Router>
