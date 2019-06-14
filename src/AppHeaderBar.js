@@ -1,4 +1,5 @@
 import React from "react";
+import firebase from "./firebase.js";
 import { makeStyles } from "@material-ui/core/styles";
 import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
@@ -22,6 +23,25 @@ const useStyles = makeStyles(theme => ({
     flexGrow: 1
   }
 }));
+
+function getName() {
+  const currUid = this.props.location.state.userUID; // pass in the logged in user's uid
+  console.log("inside componentDidMount in Profile");
+  console.log(currUid);
+
+  const userRef = firebase.database().ref("users/student"); // access all users
+  userRef.on("value", snapshot => {
+    let users = snapshot.val();
+    for (let user in users) {
+      if (currUid == users[user].uid) {
+        // check for a user with a matching uid
+        return users[user].name;
+      }
+    }
+  });
+}
+
+const name = [];
 
 function DenseAppBar() {
   const [anchorEl, setAnchorEl] = React.useState(null);
@@ -103,8 +123,8 @@ function DenseAppBar() {
             <Tooltip title="Profile Information">
               <Chip
                 size="small"
-                avatar={<Avatar>SS</Avatar>}
-                label="Sample Student"
+                avatar={<Avatar>AH</Avatar>}
+                label="Alex Hapgood"
                 clickable
                 className={classes.chip}
                 onClick={handleChipClick} // visit my profile
