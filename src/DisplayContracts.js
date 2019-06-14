@@ -12,17 +12,15 @@ import CircularProgress from '@material-ui/core/CircularProgress';
 
 
 class SimpleTable extends Component {
+  
   constructor(props) {
     super(props);
     this.state = {
-      rows: []
+      rows: [],
+      companyName: "",
+      companyEmail: ""
     };
   }
-
-  // cnx() {
-  //   const db = firebase.database().ref("users");
-  //   db.on("value", this.gotData, this.errData);
-  // }
 
   createData(issuer, title, details, bid_close, con_start, con_end) {
     return { issuer, title, details, bid_close, con_start, con_end };
@@ -35,24 +33,31 @@ class SimpleTable extends Component {
     });
   };
 
-  gotData() {
-    console.log("connection established!");
-  }
-
-  errData(err) {
-    alert("error fetching data");
-    console.log(err);
-  }
-
   getCompanyName() {
     
+    firebase
+      .database()
+      .ref("/users/company/")
+      .once("value")
+      .then(snapshot => {
+        snapshot.forEach(child => {
+          if (child.val().uid === firebase.auth().currentUser.uid) {
+            window.compName = child.val().name
+          }
+        });
+      });
   }
+
+  componentDidMount() {
+    this.getCompanyName();
+  }
+
   parseData() {
     let c = this.state.dbValue;
     let contractObjects = [];
     
 
-    console.log("c= ", c);
+    //console.log("c= ", c);
     Object.keys(c).map(item => {
       if (c[item].contracts !== undefined) {
         contractObjects.push(c[item].contracts);
@@ -62,10 +67,10 @@ class SimpleTable extends Component {
     });
 
     for (let i = 0; i < Object.keys(contractObjects).length; i++) {
-      console.log("gets to outer loops");
+      //console.log("gets to outer loops");
       if (contractObjects[i] !== "") {
         Object.keys(contractObjects[i]).map(k => {
-          console.log("gets to push");
+          //console.log("gets to push");
           
           if(contractObjects[i][k][0] === "HackCville") {
             this.state.rows.push(
@@ -126,6 +131,7 @@ class SimpleTable extends Component {
 
     return (
       <div>
+        <h2>{window.compName}</h2>
         {this.state.dbValue === undefined && this.state.rows !== [] ? (
           <h2>Loading...<CircularProgress/></h2>
         ) : (

@@ -5,44 +5,13 @@ import CreateContract from "./CreateContract.js";
 import Icon from "@material-ui/core/Icon";
 import firebase from "./firebase.js";
 import DisplayContracts from "./DisplayContracts.js"
-import TestTable from './TestTable.js'
+
 const AdapterLink = React.forwardRef((props, ref) => (
   <Link innerRef={ref} {...props} />
 ));
 
 export default class CompanyProfile extends React.Component {
-  state = {
-    info: []
-  };
 
-  getData() {
-    var info = [];
-    firebase
-      .database()
-      .ref("/users/company/")
-      .once("value")
-      .then(snapshot => {
-        snapshot.forEach(child => {
-		  info.push(child.val().name);
-        });
-      });
-    this.setState({
-      info: info
-    });
-    return info;
-  }
-
-  componentDidMount() {
-    this.setState({
-      info: this.getData()
-    });
-  }
-
-  updateState() {
-    this.setState({
-      info: this.getData()
-    });
-  }
 
   render() {
     return (
@@ -63,20 +32,9 @@ export default class CompanyProfile extends React.Component {
           </Button>
           <Route path="/CreateContract" component={CreateContract} />
           <h1>Current Contracts</h1>
-
-		  	
         </Router>
-        <TestTable/>
+        <DisplayContracts/>
       </div>
     );
   }
 }
-
-/*{getData().map(data => {
-									{<ListItem>
-                  <ListItemText
-                    primary={data}
-                  />
-                </ListItem>}
-
-								})}*/

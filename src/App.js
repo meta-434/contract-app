@@ -11,15 +11,16 @@ import { BrowserRouter as Router, Route, Path, Link } from "react-router-dom";
 import TestTable from './TestTable';
 import CreateContract from './CreateContract';
 import Home from "./Home.js"
+import DisplayContracts from './DisplayContracts.js'
 function App() {
   return (
     <div>
      <Router>
-         <Route exact path="/" component={Login} />
-         <Route exact path="/NewUser" component={NewUser} />
+        <Route exact path="/" component={Login} />
+        <Route exact path="/NewUser" component={NewUser} />
         <Route exact path="/ContractTable" component={TestTable} />
         <Route exact path="/CompanyProfile" component={CompanyProfile} />
-        <Route exact path="/CreateContract" component={CreateContract} />
+        <Route exact path="/Contracts" component={DisplayContracts} />
       </ Router>
     </div>
   );
