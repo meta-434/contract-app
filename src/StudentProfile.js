@@ -12,23 +12,32 @@ import Grid from "@material-ui/core/Grid";
 import { flexbox } from "@material-ui/system";
 import firebase from "./firebase.js";
 import AppHeaderBar from "./AppHeaderBar.js";
+import StudentCard from "./StudentCard";
+
+import Card from '@material-ui/core/Card';
+import CardActionArea from '@material-ui/core/CardActionArea';
+import CardActions from '@material-ui/core/CardActions';
+import CardContent from '@material-ui/core/CardContent';
+import CardMedia from '@material-ui/core/CardMedia';
+import Typography from '@material-ui/core/Typography';
+import { Container } from "@material-ui/core";
+
 
 // material UI setup
-const classes = makeStyles(theme => ({
-  button: {
-    margin: theme.spacing(1)
-    // justifyContent: 'flex-end',
+const classes = makeStyles({
+  card: {
+    maxWidth: "md",
+    textAlign: 'center',
   },
-  input: {
-    display: "none"
+  media: {
+    height: 200,
+    width: 200,
+    borderRadius:100,
+    marginLeft: 'auto', // used to center image on card
+    marginRight:'auto',
+    textAlign:'center',
   },
-  root: {
-    width: "100%",
-    maxWidth: "360px",
-    backgroundColor: theme.palette.background.paper
-    // justifyContent: 'center',
-  }
-}));
+});
 
 export default class StudentProfile extends React.Component {
   state = {
@@ -69,42 +78,37 @@ export default class StudentProfile extends React.Component {
     return (
       <div>
         <AppHeaderBar />
-        <Grid>
-          <Grid item xs={12} justify="flex-end">
-            {/* Button only Available if logged in */}
-            <Button variant="contained" className={classes.button}>
-              Edit Profile
-            </Button>
-          </Grid>
 
-          {/* Dummy Data for now ...  */}
-          <h1 style={{ textAlign: "center" }}>{this.state.userObject.name}</h1>
+          {/* <h1 style={{ textAlign: "center" }}>{this.state.userObject.name}</h1> */}
 
           {/* Material UI list divider */}
-          <List component="nav" className={classes.root}>
-            <ListItem button>
-              <ListItemText>
-                {" "}
-                Email: {this.state.userObject.email_address}
-              </ListItemText>
-            </ListItem>
-            <Divider />
-            <ListItem button>
-              <ListItemText>
-                {" "}
-                GitHub: {this.state.userObject.github}
-              </ListItemText>
-            </ListItem>
-            <Divider light />
-            <ListItem button>
-              <ListItemText>
-                {" "}
-                LinkedIn: {this.state.userObject.linkedIn}
-              </ListItemText>
-            </ListItem>
-          </List>
-          <h1 style={{ textAlign: "center" }}>Current Contracts</h1>
-        </Grid>
+          <Container maxWidth="md">
+          <Card className={classes.card}>
+            <CardActionArea>
+              <CardMedia
+                className={classes.media}
+                image="https://www.placecage.com/200/300"
+                title="Contemplative Reptile"
+              />
+              <CardContent  
+                style={{ textAlign: 'center' }}
+              >
+                <Typography gutterBottom variant="h2" component="h2">
+                  {this.state.userObject.name}
+                </Typography>
+                <Typography variant="body2" color="textSecondary" component="p">
+                  Computer Science Major at UVA <br/>  
+                  Github: {this.state.userObject.github} <br/>
+                  LinkedIn: {this.state.userObject.linkedIn}
+                </Typography> <br/> 
+                <Typography gutterBottom variant="h2" component="h4">
+                  Current Contracts:
+                </Typography>
+              </CardContent>
+            </CardActionArea>
+          </Card>
+          </Container>
+      
       </div>
     );
   }
