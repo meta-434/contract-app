@@ -11,8 +11,8 @@ import { BrowserRouter as Router, Route, Path, Link } from "react-router-dom";
 import CreateContract from "./CreateContract";
 import AppHeaderBar from "./AppHeaderBar";
 import Home from "./Home.js";
-import TestTable from "./TestTable.js";
-import StudentBid from "./StudentBid"
+import DisplayContracts from "./DisplayContracts.js";
+import StudentBid from "./StudentBid";
 
 function App() {
   return (
@@ -23,10 +23,11 @@ function App() {
         <Route exact path="/NewUser" component={NewUser} />
         <Route exact path="/Home" component={Home} />
         <Route exact path="/StudentProfile" component={StudentProfile} />
-        <Route exact path="/Contracts" component={TestTable} />
+        <Route exact path="/Contracts" component={DisplayContracts} />
         <Route exact path="/CompanyProfile" component={CompanyProfile} />
         <Route exact path="/CreateContract" component={CreateContract} />
         <Route exact path="/Bid" component={StudentBid} />
+        <Route exact path="/logout" component={Login} />
       </Router>
     </div>
   );

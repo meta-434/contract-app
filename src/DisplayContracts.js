@@ -2,38 +2,25 @@ import React, { Component } from "react";
 //import firebase connection info
 import firebase from "./firebase";
 //material-ui
-
-import { makeStyles } from "@material-ui/core/styles";
 import Table from "@material-ui/core/Table";
 import TableBody from "@material-ui/core/TableBody";
 import TableCell from "@material-ui/core/TableCell";
 import TableHead from "@material-ui/core/TableHead";
 import TableRow from "@material-ui/core/TableRow";
 import Paper from "@material-ui/core/Paper";
+import CircularProgress from '@material-ui/core/CircularProgress';
 
-const useStyles = makeStyles(theme => ({
-  root: {
-    width: "100%",
-    marginTop: theme.spacing(3),
-    overflowX: "auto"
-  },
-  table: {
-    minWidth: 650
-  }
-}));
 
 class SimpleTable extends Component {
+  
   constructor(props) {
     super(props);
     this.state = {
-      rows: []
+      rows: [],
+      companyName: "",
+      companyEmail: ""
     };
   }
-
-  // cnx() {
-  //   const db = firebase.database().ref("users");
-  //   db.on("value", this.gotData, this.errData);
-  // }
 
   createData(issuer, title, details, bid_close, con_start, con_end) {
     return { issuer, title, details, bid_close, con_start, con_end };
@@ -46,21 +33,31 @@ class SimpleTable extends Component {
     });
   };
 
-  gotData() {
-    console.log("connection established!");
+  async getCompanyName() {
+    
+    firebase
+      .database()
+      .ref("/users/company/")
+      .once("value")
+      .then(snapshot => {
+        snapshot.forEach(child => {
+          if (child.val().uid === firebase.auth().currentUser.uid) {
+            return child.val().name
+          }
+        });
+      });
   }
 
-  errData(err) {
-    alert("error fetching data");
-    console.log(err);
+  componentDidMount() {
+    this.getCompanyName();
   }
 
   parseData() {
     let c = this.state.dbValue;
     let contractObjects = [];
-    let result = [];
+    
 
-    console.log("c= ", c);
+    //console.log("c= ", c);
     Object.keys(c).map(item => {
       if (c[item].contracts !== undefined) {
         contractObjects.push(c[item].contracts);
@@ -70,20 +67,23 @@ class SimpleTable extends Component {
     });
 
     for (let i = 0; i < Object.keys(contractObjects).length; i++) {
-      console.log("gets to outer loops");
+      //console.log("gets to outer loops");
       if (contractObjects[i] !== "") {
         Object.keys(contractObjects[i]).map(k => {
-          console.log("gets to push");
-          this.state.rows.push(
-            this.createData(
-              contractObjects[i][k][0],
-              contractObjects[i][k][1],
-              contractObjects[i][k][2],
-              contractObjects[i][k][3],
-              contractObjects[i][k][4],
-              contractObjects[i][k][5]
-            )
-          );
+          //console.log("gets to push");
+          
+          if(contractObjects[i][k][0] === "Chrome") {
+            this.state.rows.push(
+              this.createData(
+                contractObjects[i][k][0],
+                contractObjects[i][k][1],
+                contractObjects[i][k][2],
+                contractObjects[i][k][3],
+                contractObjects[i][k][4],
+                contractObjects[i][k][5]
+              )
+            );
+          }
         });
       }
     }
@@ -131,8 +131,9 @@ class SimpleTable extends Component {
 
     return (
       <div>
+        <h2>{window.compName}</h2>
         {this.state.dbValue === undefined && this.state.rows !== [] ? (
-          <p>EMPTY</p>
+          <h2>Loading...<CircularProgress/></h2>
         ) : (
           this.makeTable()
         )}
