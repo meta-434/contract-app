@@ -120,7 +120,7 @@ class SimpleTable extends Component {
     return (
       <div>
         {this.state.dbValue === undefined && this.state.rows !== [] ? (
-          <p>EMPTY</p>
+          <p>Loading...</p>
         ) : (
           this.makeTable()
         )}
