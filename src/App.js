@@ -17,7 +17,7 @@ function App() {
      <Router>
          <Route exact path="/" component={Login} />
          <Route exact path="/NewUser" component={NewUser} />
-        <Route exact path="/Test" component={TestTable} />
+        <Route exact path="/ContractTable" component={TestTable} />
         <Route exact path="/CompanyProfile" component={CompanyProfile} />
         <Route exact path="/CreateContract" component={CreateContract} />
       </ Router>
