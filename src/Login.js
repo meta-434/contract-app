@@ -1,7 +1,6 @@
 // Login
 import React from 'react';
-import 'antd/dist/antd.css';
-import './login.css';
+// import './login.css';
 import Textfield from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import {CloseIcon} from '@material-ui/icons/Close';
@@ -27,23 +26,19 @@ const classes = makeStyles(theme => ({
       flexDirection: 'column',
       alignItems: 'center',
     },
-    avatar: {
-      margin: theme.spacing(1),
-      backgroundColor: theme.palette.secondary.main,
-    },
-    form: {
-      width: '100%', // Fix IE 11 issue.
-      marginTop: theme.spacing(1),
-    },
     submit: {
       margin: theme.spacing(3, 0, 2),
     },
   }));
-  
+
 const setErrorMessage = (error) => {
     return (
         error
     )
+}
+
+const onClose = (event) => {
+  console.log("I was closed")
 }
 
 class LogIn extends React.Component{
@@ -54,6 +49,7 @@ class LogIn extends React.Component{
         userData: [],
         loginMessage : '',
         loginError: false,
+        passwordExists: false,
         //logInClicked: false,
     }
 
@@ -81,6 +77,24 @@ class LogIn extends React.Component{
         })
     }
 
+  displayMessage =() =>{
+    console.log('gets here')
+    this.setState({
+        passwordExists: true,
+    })
+}
+handlePassword = () => {
+  var auth = firebase.auth();
+  var emailAddress = this.state.username;
+  auth.sendPasswordResetEmail(emailAddress).then(function() {
+    console.log('email sent');
+  }).then(this.displayMessage)
+  .catch(function(error) {
+    console.log('no email');
+  }).then(this.displayMessage)
+}
+  
+
     // if they enter info and login... 
     handleLogIn = () => {
         firebase.auth().signInWithEmailAndPassword(this.state.username, this.state.password)
@@ -103,9 +117,6 @@ class LogIn extends React.Component{
           }).then(this.errorMessage);
     }
 
-
-
-      
     // check if their login info is correct
     checkSignin = (currentUser) => {
           firebase.auth().onAuthStateChanged(user => {
@@ -131,16 +142,16 @@ class LogIn extends React.Component{
             }
           });
     }
-
     
     render(){
         return(
+          <div>
+          <div className='header'></div>
             <div className="login">
-                <h4>RevTech</h4>
-                <h3>Welcome Back</h3>
-                <div>Sign in to stay updated on new oppurtunities</div>
+                <div className='company-name'>Rev<b className='tech'>Tech</b></div>
+                <div className='greeting'>Welcome Back</div>
+                <div>Sign in to stay updated on new opportunities</div>
                 <div  className="login-form">
-                        {this.state.loginError ? <Alert message="Invalid username or password, try again" type="error" /> : <div></div>}
                         <Textfield
                             variant="outlined" margin="normal" required fullWidth 
                             id="email" label="Username(email)" 
@@ -152,22 +163,22 @@ class LogIn extends React.Component{
                             id="password" label="Password" 
                             onChange={(e)=>this.changePassword(e.target.value)}
                         />
-
-                        <Button type="submit" fullWidth variant="contained" color="primary"
-                        onClick={this.handleLogIn} className={classes.submit}>
+                        <Button style={{backgroundColor:"#0077B5"}}type="submit" fullWidth variant="contained" color="primary"
+                        onClick={this.handleLogIn} className={classes.submit} >
                             Log in
                         </Button>
+                        {this.state.loginError ? <Alert message="Invalid username or password, try again" type="error" /> : <div></div>}
                         <Container maxWidth="sm">
                             <Container item>
-                                <Link to="/">
-                                    Forgot password?
-                                </Link>
+                                <Link to="/" style={{color:"#0077B5"}} onClick={this.handlePassword}>Forgot Password?</Link>
+                                {this.state.passwordExists ? <Alert message="Check your email to reset password." type="info" closable onClose={onClose}/> : <div></div>}
                             </Container>
                             <Container item>
-                                <Link to="/NewUser">Don't have an account? Sign up</Link>
+                              Don't have an account? <Link to="/NewUser" style={{color:"#0077B5"}}>Join now</Link>
                             </Container>
                         </Container>
-                        </div>              
+                        </div>          
+            </div>
             </div>
         )
     }

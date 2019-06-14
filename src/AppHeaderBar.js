@@ -11,7 +11,6 @@ import Tooltip from "@material-ui/core/Tooltip";
 import Menu from "@material-ui/core/Menu";
 import MenuItem from "@material-ui/core/MenuItem";
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
-
 const useStyles = makeStyles(theme => ({
   root: {
     flexGrow: 1
@@ -42,6 +41,7 @@ function DenseAppBar() {
   //for click away
   function handleClose() {
     console.log("close triggered");
+    window.history.go();
     setAnchorEl(null);
   }
   //for profile selection
@@ -61,7 +61,7 @@ function DenseAppBar() {
                 aria-haspopup="true"
                 onClick={handleClick}
               >
-                <MenuIcon  color="disabled"/>
+                <MenuIcon color="disabled" />
               </IconButton>
               <Menu
                 id="simple-menu"
@@ -70,16 +70,28 @@ function DenseAppBar() {
                 open={Boolean(anchorEl)}
                 onClose={handleClose}
               >
-                <Link to="/home" style={{ textDecoration: "none", color: 'black' }}>
+                <Link
+                  to="/Home"
+                  style={{ textDecoration: "none", color: "black" }}
+                >
                   <MenuItem>Home</MenuItem>
                 </Link>
-                <Link to="/profile" style={{ textDecoration: "none", color: 'black' }}>
+                <Link
+                  to="/StudentProfile"
+                  style={{ textDecoration: "none", color: "black" }}
+                >
                   <MenuItem>Profile</MenuItem>
                 </Link>
-                <Link to="/contracts" style={{ textDecoration: "none", color: 'black' }}>
+                <Link
+                  to="/Contracts"
+                  style={{ textDecoration: "none", color: "black" }}
+                >
                   <MenuItem>Open Contracts</MenuItem>
                 </Link>
-                <Link to="/logout" style={{ textDecoration: "none", color: 'black' }}>
+                <Link
+                  to="/logout"
+                  style={{ textDecoration: "none", color: "black" }}
+                >
                   <MenuItem>Logout</MenuItem>
                 </Link>
               </Menu>
